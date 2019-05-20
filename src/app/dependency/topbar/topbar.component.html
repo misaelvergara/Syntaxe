@@ -1,0 +1,16 @@
+<ion-toolbar>
+  <ion-title [class.center]="true">
+    <div *ngIf="showAppName">
+      <span [class.black]="true">synt</span>
+      <span [class.red]="true">axe</span>
+      <span [class.black]="true">.</span>
+    </div>
+    <div *ngIf="!showAppName">
+      {{ insertableTitle }}
+    </div>
+  </ion-title>
+  <ion-buttons *ngIf="enableButtons">
+      <ion-back-button slot="start" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+</ion-toolbar>
+

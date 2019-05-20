@@ -1,14 +1,39 @@
+<ion-footer>
+  <app-bottombar></app-bottombar>
+</ion-footer>
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
+  <app-topbar [showAppName]="true"></app-topbar>
 </ion-header>
+<ion-content [scrollY]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Introdução</ion-card-title>
+    </ion-card-header>
+    <ion-item>
+      <ion-icon name="arrow-dropright-circle" slot="start"></ion-icon>
+      <ion-label>Bem-vindo ao Syntaxe!</ion-label>
+      <ion-button slot="end">INICIAR</ion-button>
+    </ion-item>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+    <ion-card-content>
+      Preparamos um guia para você fazer o melhor uso de nosso app. Todos os detalhes que você precisa
+      saber estão aqui.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card [routerLink]="['/component']">
+    <ion-card-header>
+      <ion-card-title>Guia de Conceitos</ion-card-title>
+    </ion-card-header>
+    <ion-item>
+      <ion-icon name="arrow-dropright-circle" slot="start"></ion-icon>
+      <ion-label>Índice de todos os conceitos abrangidos</ion-label>
+      <ion-button fill="outline" slot="end">ABRIR</ion-button>
+    </ion-item>
+
+    <ion-card-content>
+      Descrição...
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+

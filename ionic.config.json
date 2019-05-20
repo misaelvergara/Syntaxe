@@ -1,5 +1,8 @@
 {
   "name": "Syntaxe",
-  "integrations": {},
-  "type": "angular"
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "c738a9e0"
 }

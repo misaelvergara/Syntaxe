@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
-import { HomePage } from './home.page';
+import { IonicModule } from '@ionic/angular';
+
+import { ComponentPage } from './component.page';
 import { BottombarComponent } from '../dependency/bottombar/bottombar.component';
 import { TopbarComponent } from '../dependency/topbar/topbar.component';
+
 
 @NgModule({
   imports: [
@@ -16,14 +18,14 @@ import { TopbarComponent } from '../dependency/topbar/topbar.component';
     RouterModule.forChild([
       {
         path: '',
-        component: HomePage
+        component: ComponentPage
       }
     ])
   ],
   declarations: [
-    HomePage,
+    ComponentPage,
     BottombarComponent,
     TopbarComponent
   ]
 })
-export class HomePageModule {}
+export class ComponentPageModule {}
