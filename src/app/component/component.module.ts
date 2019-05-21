@@ -6,26 +6,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ComponentPage } from './component.page';
-import { BottombarComponent } from '../dependency/bottombar/bottombar.component';
-import { TopbarComponent } from '../dependency/topbar/topbar.component';
+import { TellBarService } from '../dependency/tell-bar.service';
 
+const routes: Routes = [
+  {
+    path: '',
+    component: ComponentPage
+  }
+];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: ComponentPage
-      }
-    ])
+    RouterModule.forChild(routes)
   ],
-  declarations: [
-    ComponentPage,
-    BottombarComponent,
-    TopbarComponent
-  ]
+  declarations: [ComponentPage],
+  providers: [TellBarService]
 })
 export class ComponentPageModule {}

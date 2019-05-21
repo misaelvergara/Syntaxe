@@ -5,14 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import { BottombarComponent } from '../dependency/bottombar/bottombar.component';
-import { TopbarComponent } from '../dependency/topbar/topbar.component';
+import { BarModule } from '../dependency/bar/bar.module';
+import { TellBarService } from '../dependency/tell-bar.service';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    BarModule,
     RouterModule.forChild([
       {
         path: '',
@@ -22,8 +24,9 @@ import { TopbarComponent } from '../dependency/topbar/topbar.component';
   ],
   declarations: [
     HomePage,
-    BottombarComponent,
-    TopbarComponent
+  ],
+  providers: [
+    TellBarService
   ]
 })
 export class HomePageModule {}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { TellBarService } from '../dependency/tell-bar.service';
 
 @Component({
   selector: 'app-home',
@@ -8,20 +8,18 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomePage {
 
-  constructor(private menu: MenuController) { }
+  /*  @param dependency injection
+      @explain: creates an instance of the tellBar service 
+      services are singletons, which means that there is a single
+      instance of the service running accross the app. Therefore, 
+      instanciating inside a component will not create an instance
+      of the service, but will actually access the current single
+      instance.
+  */
 
-  openFirst() {
-    this.menu.enable(true, 'first');
-    this.menu.open('first');
+  constructor(private tellbarService: TellBarService) {
+    /* tellbarService settings */
+    this.tellbarService.setShowAppName(false);
+    this.tellbarService.setEnableButtons(true);
   }
-
-  openEnd() {
-    this.menu.open('end');
-  }
-
-  openCustom() {
-    this.menu.enable(true, 'custom');
-    this.menu.open('custom');
-  }
-
 }
