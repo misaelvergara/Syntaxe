@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { TellBarService } from '../dependency/tell-bar.service';
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -17,9 +15,6 @@ export class HomePage {
       instance.
   */
 
-  constructor(private tellbarService: TellBarService) {
-    /* tellbarService settings */
-    this.tellbarService.setShowAppName(false);
-    this.tellbarService.setEnableButtons(true);
+  constructor() {
   }
 }

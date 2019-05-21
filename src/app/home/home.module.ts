@@ -5,8 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import { BarModule } from '../dependency/bar/bar.module';
-import { TellBarService } from '../dependency/tell-bar.service';
 
 
 @NgModule({
@@ -14,7 +12,6 @@ import { TellBarService } from '../dependency/tell-bar.service';
     CommonModule,
     FormsModule,
     IonicModule,
-    BarModule,
     RouterModule.forChild([
       {
         path: '',
@@ -24,9 +21,6 @@ import { TellBarService } from '../dependency/tell-bar.service';
   ],
   declarations: [
     HomePage,
-  ],
-  providers: [
-    TellBarService
   ]
 })
 export class HomePageModule {}
