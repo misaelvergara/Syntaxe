@@ -1,3 +1,43 @@
+<ion-header>
+    <app-topbar [showsAppName]="false" [insertableTitle]="['Componente']" [showsBackButton]="true"></app-topbar>
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col no-padding>
+                <div class="codecard" no-padding>
+
+                    ok<br>
+                    ok
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-footer>
+    <ion-item>
+        <ion-label>Action Sheet</ion-label>
+        <ion-select value="javascript" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One">
+            <ion-select-option value="javascript">Javascript</ion-select-option>
+            <ion-select-option value="java">Java</ion-select-option>
+            <ion-select-option value="visualg">Visualg</ion-select-option>
+        </ion-select>
+    </ion-item>
+</ion-footer>
+
 <ion-content>
-Olá, mundjo!
+    <ion-list>
+
+
+    </ion-list>
+
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col>
+                <div class="codecard" no-padding>ok<br>
+                    ok</div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
 </ion-content>

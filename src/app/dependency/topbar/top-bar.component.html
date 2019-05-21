@@ -9,7 +9,7 @@
       {{ insertableTitle }}
     </div>
   </ion-title>
-  <ion-buttons *ngIf="showsBackButton">
+  <ion-buttons slot="start" *ngIf="showsBackButton">
       <ion-back-button slot="start" defaultHref="/home"></ion-back-button>
     </ion-buttons>
 </ion-toolbar>

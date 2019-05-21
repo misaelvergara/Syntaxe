@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { TopBarModule } from '../dependency/topbar/top-bar.module';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { HomePage } from './home.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    TopBarModule,
     RouterModule.forChild([
       {
         path: '',
