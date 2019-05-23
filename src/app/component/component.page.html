@@ -4,10 +4,13 @@
         <ion-row>
             <ion-col no-padding>
                 <div class="codecard" no-padding>
-
-                    ok<br>
-                    ok
+                    String name = new String();
                 </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col no-padding>
+                <ion-button></ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -15,11 +18,12 @@
 
 <ion-footer>
     <ion-item>
-        <ion-label>Action Sheet</ion-label>
-        <ion-select value="javascript" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One">
+        <!--<ion-label>Action Sheet</ion-label>-->
+        <ion-select slot="end"
+        value="javascript"
+        [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One">
             <ion-select-option value="javascript">Javascript</ion-select-option>
             <ion-select-option value="java">Java</ion-select-option>
-            <ion-select-option value="visualg">Visualg</ion-select-option>
         </ion-select>
     </ion-item>
 </ion-footer>
