@@ -1,0 +1,45 @@
+{
+    "JavaScript": {
+        "Tipos de Dados": {
+            "Dados Complexos": [
+                "object",
+                "function"
+            ],
+            "Dados Primitivos": [
+                "string",
+                "number",
+                "boolean",
+                "undefined"
+            ]
+        }
+    },
+    "Java": {
+        "Tipos de Dados": {
+            "Dados Não-Primitivos": [
+                "Class",
+                "Object",
+                "Interface",
+                "String",
+                "Array"
+            ],
+            "Dados Primitivos": [
+                "boolean",
+                "char",
+                {
+                    "Números": {
+                        "Tipos Inteiros": [
+                            "byte",
+                            "short",
+                            "int",
+                            "long"
+                        ],
+                        "Tipos Floating Point": [
+                            "float",
+                            "double"
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

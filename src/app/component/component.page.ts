@@ -15,6 +15,15 @@ export class ComponentPage implements OnInit {
 
   customActionSheetOptions: any = {
     header: 'Linguagem atual',
-    subHeader: 'Selecione outra linguagem'
+    subHeader: 'Selecione outra linguagem para este conteúdo'
+  };
+
+  comp = {
+    'headerCode': `
+<pre>Hi
+  My name is Angular
+    <strong>Angular 4</strong>
+  I like pandas</pre>
+`,
   };
 }

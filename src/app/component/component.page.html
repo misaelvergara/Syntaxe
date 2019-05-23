@@ -3,7 +3,7 @@
     <ion-grid no-padding>
         <ion-row>
             <ion-col no-padding>
-                <div class="codecard" no-padding>
+                <div [innerHTML]="comp.headerCode" class="codecard" no-padding>
                     String name = new String();
                 </div>
             </ion-col>
@@ -18,7 +18,7 @@
 
 <ion-footer>
     <ion-item>
-        <!--<ion-label>Action Sheet</ion-label>-->
+        <ion-label>Conteúdo em:</ion-label>
         <ion-select slot="end"
         value="javascript"
         [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One">
