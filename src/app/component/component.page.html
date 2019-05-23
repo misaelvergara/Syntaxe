@@ -1,18 +1,18 @@
 <ion-header>
-    <app-topbar [showsAppName]="false" [insertableTitle]="['Componente']" [showsBackButton]="true"></app-topbar>
+    <app-topbar [showsAppName]="false" [insertableTitle]="title" [showsBackButton]="true"></app-topbar>
     <ion-grid no-padding>
         <ion-row>
             <ion-col no-padding>
-                <div [innerHTML]="comp.headerCode" class="codecard" no-padding>
-                    String name = new String();
+                <div [innerHTML]="header_code" [class.codecard]="true" no-padding>
+                   
                 </div>
             </ion-col>
         </ion-row>
-        <ion-row>
+        <!--<ion-row>
             <ion-col no-padding>
                 <ion-button></ion-button>
             </ion-col>
-        </ion-row>
+        </ion-row>-->
     </ion-grid>
 </ion-header>
 
@@ -36,9 +36,18 @@
 
     <ion-grid no-padding>
         <ion-row>
-            <ion-col>
-                <div class="codecard" no-padding>ok<br>
+            <ion-col >
+                <div [innerHTML]="comp.headerCode" no-padding>ok<br>
                     ok</div>
+                    <div [innerHTML]="comp.headerCode" no-padding>ok<br>
+                        ok</div>
+                        <div [innerHTML]="comp.headerCode" no-padding>ok<br>
+                            ok</div>
+                            <div [innerHTML]="comp.headerCode" no-padding>ok<br>
+                                ok</div>
+                                <div [innerHTML]="comp.headerCode"  no-padding>ok<br>
+                                    ok</div>
+
             </ion-col>
         </ion-row>
     </ion-grid>

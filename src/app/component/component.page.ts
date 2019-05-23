@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Data from './componentdata';
 
 @Component({
   selector: 'app-component',
@@ -6,24 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./component.page.scss'],
 })
 export class ComponentPage implements OnInit {
-
-  constructor() {    
+  constructor() {
   }
-
   ngOnInit() {
-  }
+  }  
+
+  comp = {
+    headerCode: "olá"
+  };
+  /* instantiates the Data class */
+  data: Data = new Data();
+  /* assigns appropriate data to headerCode string */
+
+  header_code = this.data.JavaScript["Tipos de Dados"]["Dados Complexos"].object.code;
+  title = this.data.JavaScript["Tipos de Dados"]["Dados Complexos"].object.title;
 
   customActionSheetOptions: any = {
     header: 'Linguagem atual',
     subHeader: 'Selecione outra linguagem para este conteúdo'
-  };
-
-  comp = {
-    'headerCode': `
-<pre>Hi
-  My name is Angular
-    <strong>Angular 4</strong>
-  I like pandas</pre>
-`,
   };
 }
