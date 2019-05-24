@@ -4,7 +4,36 @@ export default class Data {
             "Dados Complexos": {
                 "object": {
                     "title": "Objetos (objects)",
-                    "body": "",
+    /*  ################
+        # BODY #########
+        ################
+     */
+                    "body": `
+<pre>
+JavaScript objects are written with curly braces {}.
+
+<h1>An object has properties and methods</h1>
+The name:values pairs in JavaScript objects are called properties:
+
+You can access object properties in two ways.
+["name"] or .name
+
+You have already learned that JavaScript variables are containers for data values.
+Objects are variables too. But objects can contain many values.
+The values are written as name:value pairs (name and value separated by a colon).
+
+A JavaScript object literal is a comma-separated list of name-value pairs wrapped in curly braces.
+
+You define (and create) a JavaScript object with an object literal:
+
+Object literals encapsulate data, enclosing it in a tidy package.
+This minimizes the use of global variables which can cause problems when combining code.
+</pre>
+                    `,
+    /*  ################
+        # CODE #########
+        ################
+     */
                     "code": `
       <pre>
   nomeDoObjeto = {
@@ -21,7 +50,7 @@ export default class Data {
       umaBoolean: false
   };
       </pre>
-  `
+                `,
                 },
                 "array": {},
                 "function": {}

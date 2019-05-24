@@ -20,7 +20,7 @@
    word-wrap: break-word; 
 }
 
-.codecard {
+.codeCard {
     background: rgb(61, 48, 48);
     color: rgb(187, 187, 187);
     padding: 6px 10px;
@@ -28,8 +28,11 @@
     
 }
 
-.codecard pre {
+.codeCard pre {
     @include wordbreak();
-    font-family: 'Exo 2';
 }
 
+.bodyCard pre {
+    @include wordbreak();
+    font-family: Arial;
+}

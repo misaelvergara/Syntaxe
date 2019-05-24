@@ -1,53 +1,63 @@
+<!-- 
+    ########################################################
+    # HEADER ###############################################
+    ########################################################
+-->
 <ion-header>
-    <app-topbar [showsAppName]="false" [insertableTitle]="title" [showsBackButton]="true"></app-topbar>
+    <app-topbar [showsAppName]="false" [insertableTitle]="content_title" [showsBackButton]="true"></app-topbar>
     <ion-grid no-padding>
         <ion-row>
+            <!--
+                ########################################################
+                # HEADER CODE CONTENT ##################################
+                ########################################################
+            -->
             <ion-col no-padding>
-                <div [innerHTML]="header_code" [class.codecard]="true" no-padding>
+                <div [innerHTML]="header_code" [class.codeCard]="true" no-padding>
                    
                 </div>
             </ion-col>
         </ion-row>
-        <!--<ion-row>
-            <ion-col no-padding>
-                <ion-button></ion-button>
-            </ion-col>
-        </ion-row>-->
     </ion-grid>
 </ion-header>
 
+<!-- 
+    ########################################################
+    # FOOTER ###############################################
+    ########################################################
+-->
 <ion-footer>
+    <!--
+        ########################################################
+        # LANGUAGE PICKER ######################################
+        ########################################################
+    -->
     <ion-item>
         <ion-label>Conteúdo em:</ion-label>
-        <ion-select slot="end"
-        value="javascript"
-        [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One">
+        <ion-select
+            slot="end"
+            value="javascript"
+            [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet"
+            placeholder="Select One">
             <ion-select-option value="javascript">Javascript</ion-select-option>
             <ion-select-option value="java">Java</ion-select-option>
         </ion-select>
     </ion-item>
 </ion-footer>
 
+<!-- 
+    ########################################################
+    # CONTENT ##############################################
+    ########################################################
+-->
 <ion-content>
-    <ion-list>
-
-
-    </ion-list>
-
     <ion-grid no-padding>
         <ion-row>
-            <ion-col >
-                <div [innerHTML]="comp.headerCode" no-padding>ok<br>
-                    ok</div>
-                    <div [innerHTML]="comp.headerCode" no-padding>ok<br>
-                        ok</div>
-                        <div [innerHTML]="comp.headerCode" no-padding>ok<br>
-                            ok</div>
-                            <div [innerHTML]="comp.headerCode" no-padding>ok<br>
-                                ok</div>
-                                <div [innerHTML]="comp.headerCode"  no-padding>ok<br>
-                                    ok</div>
+            <ion-col>
+                <div class="bodyCard" [innerHTML]="content_body">
 
+                </div>
             </ion-col>
         </ion-row>
     </ion-grid>
