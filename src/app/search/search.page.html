@@ -1,0 +1,23 @@
+<ion-header>
+  <app-topbar [showsAppName]="false" [insertableTitle]="['Pesquisar']" [showsBackButton]="true"></app-topbar>
+  <ion-toolbar>
+    <!-- 
+      ngModel > two way data binding; assigns changes to a string in
+      real time
+      ionChange > called every time the element changes
+    -->
+    <ion-input [class.searchbar]="true" color="light" slot="end" placeholder="Pesquisar.." [formControl]="searchControl"
+      (ionChange)="onSearchInput()"></ion-input>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="searching" class="spinner-container searching">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      {{ item.title }}
+    </ion-item>
+  </ion-list>
+</ion-content>
