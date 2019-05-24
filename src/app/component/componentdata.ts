@@ -1,14 +1,14 @@
 export default class Data {
     JavaScript = {
-        "Tipos de Dados": {
-            "Dados Complexos": {
-                "object": {
-                    "title": "Objetos (objects)",
+        'Tipos de Dados': {
+            'Dados Complexos': {
+                'object': {
+                    'title': 'Objetos (objects)',
     /*  ################
         # BODY #########
         ################
      */
-                    "body": `
+                    'body': `
 <pre>
 JavaScript objects are written with curly braces {}.
 
@@ -34,7 +34,7 @@ This minimizes the use of global variables which can cause problems when combini
         # CODE #########
         ################
      */
-                    "code": `
+                    'code': `
       <pre>
   nomeDoObjeto = {
       umaString: "valor da string valor da string valor da string valor da string valor da string valor da string valor da string valor da string ",
@@ -52,41 +52,41 @@ This minimizes the use of global variables which can cause problems when combini
       </pre>
                 `,
                 },
-                "array": {},
-                "function": {}
+                'array': {},
+                'function': {}
             },
-            "Dados Primitivos": [
-                "string",
-                "number",
-                "boolean",
-                "undefined"
+            'Dados Primitivos': [
+                'string',
+                'number',
+                'boolean',
+                'undefined'
             ]
         }
     }
 
     Java = {
-        "Tipos de Dados": {
-            "Dados Não-Primitivos": [
-                "Class",
-                "Object",
-                "Interface",
-                "String",
-                "Array"
+        'Tipos de Dados': {
+            'Dados Não-Primitivos': [
+                'Class',
+                'Object',
+                'Interface',
+                'String',
+                'Array'
             ],
-            "Dados Primitivos": [
-                "boolean",
-                "char",
+            'Dados Primitivos': [
+                'boolean',
+                'char',
                 {
-                    "Números": {
-                        "Tipos Inteiros": [
-                            "byte",
-                            "short",
-                            "int",
-                            "long"
+                    'Números': {
+                        'Tipos Inteiros': [
+                            'byte',
+                            'short',
+                            'int',
+                            'long'
                         ],
-                        "Tipos Floating Point": [
-                            "float",
-                            "double"
+                        'Tipos Floating Point': [
+                            'float',
+                            'double'
                         ]
                     }
                 }

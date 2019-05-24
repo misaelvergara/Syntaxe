@@ -23,16 +23,32 @@
 .codeCard {
     background: rgb(61, 48, 48);
     color: rgb(187, 187, 187);
-    padding: 6px 10px;
+    padding: 1px 10px;
     margin-top: 5px;
+    height: 36vh;
+    max-height: 100%;
+    transition: height, opacity, 0.45s cubic-bezier(1, 0.39, 0, 1.05);
+    opacity: 1;
     
+}
+
+pre {
+    margin: 0px 0px 0px 0px !important;
 }
 
 .codeCard pre {
     @include wordbreak();
+    height: 100%;
+    max-height: 100%;
+    text-align: left;
 }
 
 .bodyCard pre {
     @include wordbreak();
     font-family: Arial;
+}
+
+.animateCodeCard {
+    height: 0px;
+    opacity: 0;
 }

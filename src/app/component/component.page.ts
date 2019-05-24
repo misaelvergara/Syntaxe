@@ -7,26 +7,24 @@ import Data from './componentdata';
   styleUrls: ['./component.page.scss'],
 })
 export class ComponentPage implements OnInit {
-  constructor() {
-  }
-  ngOnInit() {
-  }  
-
-  comp = {
-    headerCode: "olá"
-  };
   /* instantiates the Data class */
+  expandsCode = false;
+
   data: Data = new Data();
 
-  /* angular template settings 
+  /* angular template settings
     @explanation: strings that are interpolated in the template */
-  content_title = this.data.JavaScript["Tipos de Dados"]["Dados Complexos"].object.title;
-  header_code = this.data.JavaScript["Tipos de Dados"]["Dados Complexos"].object.code;
-  content_body = this.data.JavaScript["Tipos de Dados"]["Dados Complexos"].object.body;
-  
+  contentTitle = this.data.JavaScript['Tipos de Dados']['Dados Complexos'].object.title;
+  headerCode = this.data.JavaScript['Tipos de Dados']['Dados Complexos'].object.code;
+  contentBody = this.data.JavaScript['Tipos de Dados']['Dados Complexos'].object.body;
 
   customActionSheetOptions: any = {
     header: 'Linguagem atual',
     subHeader: 'Selecione outra linguagem para este conteúdo'
   };
+
+  constructor() {
+  }
+  ngOnInit() {
+  }
 }

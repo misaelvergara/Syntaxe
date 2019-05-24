@@ -4,18 +4,26 @@
     ########################################################
 -->
 <ion-header>
-    <app-topbar [showsAppName]="false" [insertableTitle]="content_title" [showsBackButton]="true"></app-topbar>
+    <app-topbar [showsAppName]="false" [insertableTitle]="contentTitle" [showsBackButton]="true"></app-topbar>
     <ion-grid no-padding>
-        <ion-row>
+        <ion-row text-center>
             <!--
                 ########################################################
                 # HEADER CODE CONTENT ##################################
                 ########################################################
             -->
             <ion-col no-padding>
-                <div [innerHTML]="header_code" [class.codeCard]="true" no-padding>
+                <div
+                [innerHTML]="headerCode" 
+                [class.codeCard]="true"
+                [class.animateCodeCard]="expandsCode"
+                no-padding>
                    
                 </div>
+                <ion-button size="small" fill="outline" (click)="expandsCode ? expandsCode=false : expandsCode=true">
+                    <ion-icon [style.display]="expandsCode ? ['none'] : ['block']" name="md-arrow-dropup"></ion-icon>
+                    <ion-icon [style.display]="expandsCode ? ['block'] : ['none']" name="md-arrow-dropdown"></ion-icon>
+                </ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -55,7 +63,7 @@
     <ion-grid no-padding>
         <ion-row>
             <ion-col>
-                <div class="bodyCard" [innerHTML]="content_body">
+                <div class="bodyCard" [innerHTML]="contentBody">
 
                 </div>
             </ion-col>
