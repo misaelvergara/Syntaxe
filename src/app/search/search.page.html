@@ -1,24 +1,38 @@
 <ion-header>
   <app-topbar [showsAppName]="false" [insertableTitle]="['Pesquisar']" [showsBackButton]="true"></app-topbar>
-  <ion-toolbar>
-    <!-- 
-      ngModel > two way data binding; assigns changes to a string in
-      real time
-      ionChange > called every time the element changes
-    -->
-    <ion-input [class.searchbar]="true" color="light" slot="end" placeholder="Pesquisar.." [formControl]="searchControl"
-      (ionChange)="onSearchInput()"></ion-input>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngIf="searching" class="spinner-container searching">
-    <ion-spinner></ion-spinner>
-  </div>
-  <ion-list>
-    <h1>{{ outputHeader }}</h1>
-    <ion-item *ngFor="let item of items">
-      {{ item.title }}
+  <div class="search-header-container">
+    <ion-item lines="none" class="remove-bg">
+      <div class="searching" slot="start" *ngIf="userIsTyping">
+        <ion-spinner name="crescent" color="light"></ion-spinner>
+      </div>
+      <ion-icon name="ios-checkmark" color="light" slot="start" *ngIf="!userIsTyping"></ion-icon>
+      <ion-label class="search-header-white">{{ resultHeader}}</ion-label>
     </ion-item>
+    <ion-item lines="none" *ngIf="canDisplaySecHeader" class="ion-text-center">
+      <ion-label class="search-header-black"><span class="search-secondary-header">{{ outputHeader }}</span></ion-label>
+    </ion-item>
+  </div>
+
+  <ion-list>
+    <ion-card *ngFor="let index of receivedItems">
+      <ion-card-header>
+        <ion-card-title>{{ index.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-item>
+        <ion-icon name="git-network" slot="end"></ion-icon>
+        <ion-icon name="arrow-round-forward" slot="end"></ion-icon>
+        <ion-label class="search-header-red">{{ index.tree.join(' > ') }}</ion-label>
+      </ion-item>
+      <ion-card-content>
+        <ion-label>{{ index.descpt }}</ion-label>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
+
 </ion-content>
+<ion-footer *ngIf="userIsTyping">
+  <ion-progress-bar color="primary" type="indeterminate"></ion-progress-bar>
+</ion-footer>

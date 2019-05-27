@@ -12,3 +12,42 @@
   @include bg_grad(45deg,#000000,#920000);
   margin: 5px 0 5px 0;
 }
+
+.search-header-container {
+  @include bg_grad(45deg,#0c0909,#920000);
+  --ion-item-background: none;
+    --ion-item-background-color: none;
+}
+
+.remove-bg {
+  --ion-item-background: none;
+  --ion-item-background-color: none;
+}
+
+.search-header-white {
+  --ion-item-color: #bba9a9;
+  --color: #bba9a9;
+  --ion-text-color: #bba9a9;
+}
+
+.search-header-black {
+  --ion-item-color: #000;
+  --color: #000;
+  --ion-text-color: #000;
+}
+
+.search-header-red {
+  --ion-item-color: rgb(63, 58, 58);
+  --color: rgb(63, 58, 58);
+  --ion-text-color: rgb(63, 58, 58);
+  font-size: 14px;
+}
+
+.search-secondary-header {
+  padding: 0px 6px;
+  border-radius: 4px;
+  font-size: 16px;
+  background: #c4c4c4;
+  font-weight: bold;
+  font-family: 'Crete Round';
+}

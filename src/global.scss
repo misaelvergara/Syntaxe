@@ -28,15 +28,13 @@
   }
 
 .codeCard {
-    background: rgb(61, 48, 48);
+    @include bg_grad(160deg,rgb(104, 16, 16),rgb(53, 19, 19));
     color: rgb(187, 187, 187);
     padding: 1px 10px;
-    margin-top: 5px;
     height: 36vh;
     max-height: 100%;
     transition: height, opacity, 0.45s cubic-bezier(1, 0.39, 0, 1.05);
-    opacity: 1;
-    
+    opacity: 1; 
 }
 
 pre {
@@ -69,7 +67,7 @@ pre {
 }
 
 .searching {
+    flex-flow: column nowrap;
     justify-content: center;
-    display: flex; 
-    padding-top: 18px;
+    display: flex;
 }

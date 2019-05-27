@@ -1,0 +1,37 @@
+@mixin bg_grad($deg, $col1, $col2) {
+  background: $col1;
+  background: -moz-linear-gradient($deg, $col1 0%, $col2 100%);
+  background: -webkit-linear-gradient($deg, $col1 0%, $col2 100%);
+  background: linear-gradient($deg, $col1 0%, $col2 100%);
+}
+
+.comp-icon-holder {
+  background: black;
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: column wrap;
+  padding: 4px 2px;
+  margin: 0px;
+  border-radius: 0px;
+  transition: all 0.45s cubic-bezier(1, 0.39, 0, 1.05);
+}
+
+.comp-icon-holder-invert {
+  @include bg_grad(30deg,rgb(109, 13, 13),rgba(44, 16, 16, 0));
+    //border-bottom-left-radius: 6px;
+    //border-bottom-right-radius: 6px;
+    border-radius: 6px;
+    align-self: stretch;
+    justify-content: flex-end;
+    flex-flow: row nowrap;
+    padding: 1px 3px;
+    margin: 2px 4px 4px 6px;
+  }
+
+.flex-header {
+  width: 100vw;
+  @include bg_grad(50deg,rgb(104, 16, 16),rgb(53, 19, 19));
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}

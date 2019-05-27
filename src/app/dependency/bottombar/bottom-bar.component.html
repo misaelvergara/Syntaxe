@@ -1,3 +1,13 @@
 <ion-toolbar>
-  <ion-input [class.searchbar]="true" color="light" slot="end" placeholder="Pesquisar.."></ion-input>
+  <!-- 
+      ngModel > two way data binding; assigns changes to a string in
+      real time
+      ionChange > called every time the element changes
+    -->
+    <!--<ion-button style="margin-right: 14px;" color="dark" size="small" slot="end" fill="outline">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>-->
+  <ion-input
+  [class.searchbar]="true" (click)="goToSearchPage()" color="light" slot="end" placeholder="Pesquisar.."
+  [formControl]="searchControl" (ionChange)="userIsTyping()"></ion-input>
 </ion-toolbar>
