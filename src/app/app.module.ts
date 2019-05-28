@@ -14,7 +14,7 @@ import { BottomBarModule } from './dependency/bottombar/bottom-bar.module';
   declarations: [
     AppComponent,
   ],
-  entryComponents: [],
+  entryComponents: [AppComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -28,6 +28,6 @@ import { BottomBarModule } from './dependency/bottombar/bottom-bar.module';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

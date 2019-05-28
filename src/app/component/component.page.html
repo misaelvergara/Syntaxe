@@ -18,19 +18,24 @@
                 </div>
 
                 <div class="comp-icon-holder" [class.comp-icon-holder-invert]="expandsCode">
-                    <ion-button fill="clear" color="tertiary" size="small">
-                        <ion-icon slot="icon-only" name="copy"></ion-icon>
-                    </ion-button>
-                    <ion-button fill="clear" color="tertiary" size="small">
+                    <ion-button (click)="showTree()" fill="clear" color="tertiary" size="small">
                         <ion-icon slot="icon-only" name="git-network"></ion-icon>
                     </ion-button>
-                    <ion-button fill="clear" color="tertiary" size="small"
-                        (click)="expandsCode ? expandsCode=false : expandsCode=true">
-                        <ion-icon slot="icon-only" [style.display]="expandsCode ? ['none'] : ['block']"
-                            name="md-arrow-dropup"></ion-icon>
-                        <ion-icon slot="icon-only" [style.display]="expandsCode ? ['block'] : ['none']"
-                            name="md-arrow-dropdown"></ion-icon>
-                    </ion-button>
+
+                    <ng-template [ngIf]="showExpandButton">
+                        <ion-button fill="clear" color="tertiary" size="small">
+                            <ion-icon slot="icon-only" name="copy"></ion-icon>
+                        </ion-button>
+                        <ion-button fill="clear" color="tertiary" size="small" *ngIf="showExpandButton"
+                            (click)="expandsCode ? expandsCode=false : expandsCode=true">
+                            <ion-icon slot="icon-only" [style.display]="expandsCode ? ['none'] : ['block']"
+                                name="md-arrow-dropup"></ion-icon>
+                            <ion-icon slot="icon-only" [style.display]="expandsCode ? ['block'] : ['none']"
+                                name="md-arrow-dropdown"></ion-icon>
+                        </ion-button>
+                    </ng-template>
+
+
                 </div>
             </ion-col>
         </ion-row>

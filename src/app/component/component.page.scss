@@ -33,5 +33,5 @@
   @include bg_grad(50deg,rgb(104, 16, 16),rgb(53, 19, 19));
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
+  justify-content: flex-end;
 }

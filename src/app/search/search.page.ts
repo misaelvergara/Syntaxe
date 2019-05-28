@@ -88,4 +88,7 @@ export class SearchPage implements OnInit {
       this.queryService.userTypes(false);
     });
   }
+  addBrackets(param: any[]) {
+    return `['`+param.join(`','`)+`']`;
+  }
 }

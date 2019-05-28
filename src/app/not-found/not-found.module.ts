@@ -2,19 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+
 import { IonicModule } from '@ionic/angular';
-import { ComponentPage } from './component.page';
-import { TopBarModule } from '../dependency/topbar/top-bar.module';
-import { TreeComponent } from './tree/tree.component';
+
+import { NotFoundPage } from './not-found.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ComponentPage
-  },
-  {
-    path: ':array',
-    component: ComponentPage
+    component: NotFoundPage
   }
 ];
 
@@ -23,10 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    TopBarModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ComponentPage, TreeComponent],
-  entryComponents: [TreeComponent]
+  declarations: [NotFoundPage]
 })
-export class ComponentPageModule {}
+export class NotFoundPageModule {}
