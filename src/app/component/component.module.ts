@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: '',
     component: ComponentPage
+  },
+  {
+    path: ':array',
+    component: ComponentPage
   }
 ];
 

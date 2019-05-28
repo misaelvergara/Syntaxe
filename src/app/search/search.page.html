@@ -17,7 +17,7 @@
   </div>
 
   <ion-list>
-    <ion-card *ngFor="let index of receivedItems">
+    <ion-card *ngFor="let index of receivedItems" [routerLink]="['/component',index.title]">
       <ion-card-header>
         <ion-card-title>{{ index.title }}</ion-card-title>
       </ion-card-header>

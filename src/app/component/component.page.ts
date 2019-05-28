@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import Data from './componentdata';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { PopoverController } from '@ionic/angular';
+import { PopupComponent } from './popup/popup.component';
 
 @Component({
   selector: 'app-component',
@@ -23,8 +27,17 @@ export class ComponentPage implements OnInit {
     subHeader: 'Selecione outra linguagem para este conteúdo'
   };
 
-  constructor() {
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    public popoverCtrl: PopoverController
+  ) {}
+
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      // This is never executed, for route is not recognized
+      let myArray=params.getAll('array');
+      console.log(myArray);
+  });
   }
 }
