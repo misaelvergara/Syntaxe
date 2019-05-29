@@ -71,3 +71,56 @@ pre {
     justify-content: center;
     display: flex;
 }
+
+/*
+    List Item Styling
+*/
+
+.hierachy-horizontal-list {
+    @include bg_grad(-30deg, #efefef, #f5e2e2);
+    --ion-item-color: rgb(63, 58, 58) !important;
+    --color: rgb(63, 58, 58) !important;
+    --ion-text-color: rgb(63, 58, 58) !important;
+    --ion-item-background: none !important;
+    --ion-item-background-color: none !important;
+    padding: 5px 10px !important;
+    margin-left: 10px !important;
+    border-radius: 100px !important;
+    font-size: 14px !important;
+    white-space: nowrap !important;
+    overflow-x: scroll !important;
+    word-break: keep-all !important;
+    text-overflow: clip !important;
+    
+  }
+  
+  .list-header-title-background {
+    --ion-item-background: none;
+    --ion-item-background-color: none;
+    @include bg_grad(-25deg, #ffffff, #f7eeee);
+  }
+  
+  .background-high-hierarchy {
+    --ion-item-background: none;
+    --ion-item-background-color: none;
+    @include bg_grad(-25deg, #696969, #b75e5e);
+  }
+
+  .title-high-hierarchy {
+      --ion-item-background: none !important;
+      --ion-item-background-color: none !important;
+      color: #f4f5f8 !important;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+  
+  .list-header-title {
+    --ion-item-background: none !important;
+    --ion-item-background-color: none !important;
+    color: #424242 !important;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: bold;
+  }
+  

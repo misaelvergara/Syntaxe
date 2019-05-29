@@ -2,7 +2,7 @@
   This page implements two services through dependency injection. These services
   are then used to display a list of queried elements by the user.
 
-  . CoreDataService
+  . coreDataSrvcService
   is responsile for providing a method that allows the page to search through an array
   of data that contains many objects. The method returns an array according to the passed
   parameter.
@@ -26,7 +26,7 @@ export class SearchPage implements OnInit {
   /* DEPENDENCY INJECTION: accesses an instance (which is
     a singleton across all components) of search service */
   constructor(
-    private coreData: CoreDataService,
+    private coreDataSrvc: CoreDataService,
     private queryService: QuerySenderService) {
   }
   public receivedItems: any;
@@ -34,6 +34,10 @@ export class SearchPage implements OnInit {
   public canDisplaySecHeader = false;
   public outputHeader: string;
   public resultHeader: string;
+
+  public addBrackets(param) {
+    return this.coreDataSrvc.addBrackets(param);
+  }
 
   ngOnInit() {
     this.resultHeader = 'Comece sua busca!';
@@ -44,7 +48,7 @@ export class SearchPage implements OnInit {
     this.queryService.userIsTyping.subscribe(param => {
       this.userIsTyping = param;
       if (param) {
-      this.resultHeader = 'Pesquisando...';
+        this.resultHeader = 'Pesquisando...';
       }
       // displays loading spinner
     });
@@ -68,11 +72,11 @@ export class SearchPage implements OnInit {
       this.outputHeader = param;
 
       /*
-        calls filterItems from coreDataService, which returns results
+        calls filterItems from coreDataSrvcService, which returns results
         as an array
       */
-      this.coreData.filter.ask(param);
-      this.receivedItems = this.coreData.filter.retrieve();
+      this.coreDataSrvc.filter.ask(param);
+      this.receivedItems = this.coreDataSrvc.filter.retrieve();
 
       const length = this.receivedItems.length;
       if (length > 1) {
@@ -88,7 +92,5 @@ export class SearchPage implements OnInit {
       this.queryService.userTypes(false);
     });
   }
-  addBrackets(param: any[]) {
-    return `['`+param.join(`','`)+`']`;
-  }
 }
+

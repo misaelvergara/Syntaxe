@@ -17,14 +17,19 @@
   </div>
 
   <ion-list>
-    <ion-card *ngFor="let index of receivedItems" [routerLink]="['/component', addBrackets(index.tree)]">
-      <ion-card-header>
-        <ion-card-title>{{ index.title }}</ion-card-title>
-      </ion-card-header>
-      <ion-item>
-        <ion-icon name="git-network" slot="end"></ion-icon>
-        <ion-icon name="arrow-round-forward" slot="end"></ion-icon>
-        <ion-label class="search-header-red">{{ index.tree.join(' > ') }}</ion-label>
+    <ion-card *ngFor="let index of receivedItems">
+      <!-- title -->
+      <ion-item class="list-header-title-background" [class.background-high-hierarchy]="index.tree.length == 1"
+        [lines]="(index.tree.length == 1) ? 'none' : 'inset'" [routerLink]="['/component', addBrackets(index.tree)]">
+        <ion-icon [color]="(index.tree.length == 1) ? 'light' : 'primary'" name="md-arrow-round-forward"
+          [slot]="(index.tree.length == 1) ? 'start' : 'end'"></ion-icon>
+        <ion-label [class]="(index.tree.length == 1) ? 'title-high-hierarchy' : 'list-header-title'">{{ index.title }}
+        </ion-label>
+      </ion-item>
+      <!-- hierarchy list -->
+      <ion-item *ngIf="index.tree.length != 1">
+        <ion-icon name="md-git-network" slot="end"></ion-icon>
+        <ion-label class="hierachy-horizontal-list">{{ index.tree.join(' / ') }}</ion-label>
       </ion-item>
       <ion-card-content>
         <ion-label>{{ index.descpt }}</ion-label>

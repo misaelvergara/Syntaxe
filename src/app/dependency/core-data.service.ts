@@ -15,6 +15,7 @@ export class CoreDataService {
   private componentData = new ComponentData();
 
   private resultArray = [];
+  private sortArray = [];
   public filter = {
     lengthOfDescpt: 150,
     setTitle: true,
@@ -22,13 +23,15 @@ export class CoreDataService {
     setCode: false,
     ask: (term) => {
       this.resultArray = [];
-      this.filterData(this.componentData.array, term)
+      this.filterData(this.componentData.array, term);
     },
     askForComponent: (ref: any[]) => {
       this.resultArray = [];
       this.filterForComponent(this.componentData.array, ref);
     },
+    askForList: () => this.sort(this.componentData.array),
     retrieve: () => this.resultArray,
+    retrieveList: () => this.sortArray
   };
 
   private filterData(searchable: any[], term: string, ref = []): void {
@@ -69,9 +72,9 @@ export class CoreDataService {
         foundInCode = this.checkString(searchable[i].code || '', term);
       }
 
-      //checks whether the term was found
+      // checks whether the term was found
       if (foundInContent || foundInTitle || foundInCode) {
-        //fills the object with proper properties for the search page to handle       
+        // fills the object with proper properties for the search page to handle       
         obj = {
           title: searchable[i].title,
           descpt: searchable[i].hasContent ?
@@ -80,7 +83,7 @@ export class CoreDataService {
           tree: ref.concat(searchable[i].title)
         };
 
-        //populates the resultArray with proper results
+        // populates the resultArray with proper results
         this.resultArray = this.resultArray.concat(obj);
       }
 
@@ -120,15 +123,15 @@ export class CoreDataService {
         and a[1] contains a[2], and so on..*/
       term = ref[curIteration];
       foundInTitle = searchable[i].title == term;
-      //checks if the term was found
+      // checks if the term was found
       if (foundInTitle) {
-        //checks if the last iteration of the reference array was reached
+        // checks if the last iteration of the reference array was reached
         if (curIteration == ref.length - 1) {
-          //fills the object with proper properties for the component page to handle
+          // fills the object with proper properties for the component page to handle
           obj = {
             title: searchable[i].title,
             body: searchable[i].hasContent ? `${searchable[i].body}` : 'Página inválida',
-            code: (typeof searchable[i].code === "undefined") ? 'Página inválida' : `${searchable[i].code}`,
+            code: (typeof searchable[i].code === 'undefined') ? 'Página inválida' : `${searchable[i].code}`,
             tree: ref
           };
           this.resultArray = this.resultArray.concat(obj);
@@ -147,6 +150,39 @@ export class CoreDataService {
 
     }
   }
+
+  private sort(searchable: any[], ref = []): void {
+    const length = searchable.length;
+    let obj;
+
+    /*
+      Loops through the existing objects inside the searchable array
+    */
+    for (let i = 0; i < length; i++) {
+
+      obj = {
+        title: searchable[i].title,
+        tree: ref.concat(searchable[i].title)
+      };
+
+      // populates the resultArray with proper results
+      this.sortArray = this.sortArray.concat(obj);
+
+
+      /*
+          checks if the searchable array has any iterable arrays
+      */
+      if (searchable[i].hasChildren) {
+        this.sort(searchable[i].children, ref.concat(searchable[i].title));
+      }
+    }
+  }
+
+  public addBrackets(param: any[]) {
+    return `['`+param.join(`','`)+`']`;
+  }
+
+
 
   private checkString(p1: string, p2: string) {
     return p1.toLowerCase().indexOf(p2.toLowerCase()) > -1;
