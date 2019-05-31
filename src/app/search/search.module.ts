@@ -6,8 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { SearchPage } from './search.page';
-import { TopBarModule } from '../dependency/topbar/top-bar.module';
-import { ReactiveFormsModule } from "@angular/forms";
+import { TopBarModule } from '../dependency/top-bar/top-bar.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { GenerateListModule } from '../dependency/list-generator/list-generator.module';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    GenerateListModule,
     IonicModule,
     RouterModule.forChild(routes),
     TopBarModule,

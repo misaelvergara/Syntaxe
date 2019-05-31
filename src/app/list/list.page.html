@@ -2,19 +2,5 @@
   <app-topbar [showsAppName]="false" [insertableTitle]="['Lista-Índice']" [showsBackButton]="true"></app-topbar>
 </ion-header>
 <ion-content>
-<ion-list>
-  <ion-card *ngFor="let index of list">
-    <ion-item class="list-header-title-background" 
-    [class.background-high-hierarchy]="index.tree.length == 1" [lines]="(index.tree.length == 1) ? 'none' : 'inset'"
-    [routerLink]="['/component', addBrackets(index.tree)]">
-      <ion-icon [color]="(index.tree.length == 1) ? 'light' : 'primary'" name="md-arrow-round-forward" 
-      [slot]="(index.tree.length == 1) ? 'start' : 'end'"></ion-icon>
-      <ion-label [class]="(index.tree.length == 1) ? 'title-high-hierarchy' : 'list-header-title'">{{ index.title }}</ion-label>
-    </ion-item>
-    <ion-item *ngIf="index.tree.length != 1" lines="none">
-      <ion-icon name="md-git-network" slot="end"></ion-icon>
-      <ion-label class="hierachy-horizontal-list">{{ index.tree.join(' / ') }}</ion-label>
-    </ion-item>
-  </ion-card>
-</ion-list>
+  <app-list-generator [iterableList]="retrievedComponentList"></app-list-generator>
 </ion-content>

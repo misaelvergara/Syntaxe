@@ -7,7 +7,7 @@ import { CoreDataService } from '../dependency/core-data.service';
   styleUrls: ['./list.page.scss'],
 })
 export class ListPage implements OnInit {
-  public list: any[];
+  public retrievedComponentList: any[];
 
   constructor(private coreDataSrvc: CoreDataService) { }
 
@@ -16,11 +16,12 @@ export class ListPage implements OnInit {
   }
 
   ngOnInit() {
-    if (this.coreDataSrvc.filter.retrieveList().length < 1) {
-      this.coreDataSrvc.filter.askForList();
+    // checks if the returned array of objects is empty
+    if (!this.coreDataSrvc.filter.listWasRetrieved) {
+      // if so, it hasn't been populated yet; populate it ->
+      this.coreDataSrvc.filter.requestSortedList();
     }
-
-    this.list = this.coreDataSrvc.filter.retrieveList();
+    this.retrievedComponentList = this.coreDataSrvc.filter.retrieveSortedList();
   }
 
 }

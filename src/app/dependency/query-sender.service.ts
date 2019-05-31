@@ -16,13 +16,13 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 })
 export class QuerySenderService {
 
-  private queryString = '';
+  private query = '';
 
   /*
     declares two instances of EventEmitter
   */
-  @Output() query: EventEmitter<string> = new EventEmitter();
-  @Output() userIsTyping: EventEmitter<boolean> = new EventEmitter();
+  @Output() hasEmittedQuery: EventEmitter<string> = new EventEmitter();
+  @Output() hasEmittedUserIsTyping: EventEmitter<boolean> = new EventEmitter();
 
   /*
     declares a method that takes up a param
@@ -31,13 +31,13 @@ export class QuerySenderService {
     @method 'emit'
     emits a subscrible string that other components listen to
   */
-  newQuery(param) {
-    this.queryString = param;
-    this.query.emit(this.queryString);
+  emitNewQuery(param) {
+    this.query = param;
+    this.hasEmittedQuery.emit(this.query);
   }
 
-  userTypes(param: boolean) {
-    this.userIsTyping.emit(param);
+  emitUserIsTyping(param: boolean) {
+    this.hasEmittedUserIsTyping.emit(param);
 
   }
   constructor() { }

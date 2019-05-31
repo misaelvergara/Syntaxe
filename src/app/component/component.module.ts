@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ComponentPage } from './component.page';
-import { TopBarModule } from '../dependency/topbar/top-bar.module';
+import { TopBarModule } from '../dependency/top-bar/top-bar.module';
 import { TreeComponent } from './tree/tree.component';
 
 const routes: Routes = [

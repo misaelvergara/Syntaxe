@@ -9,20 +9,21 @@ export default class ComponentData {
                 hasContent: false,
                 hasChildren: true,
                 title: 'Tipos de Dados',
+				routes: ['Java', 'Tipos de Dados'],
                 children: [
                     {
                         hasContent: false,
                         hasChildren: true,
                         title: 'Dados Não-Primitivos',
+						routes: ['Java', 'Tipos de Dados', 'Dados Não-Primitivos'],
                         children: [
                             {
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Object (objeto)',
+								routes: ['Java', 'Tipos de Dados', 'Dados Não-Primitivos', 'Object'],
                                 body: 
-`
-<pre>
-JavaScript objects are written with curly braces {}.
+`JavaScript objects are written with curly braces {}.
 
 <h1>An object has properties and methods</h1>
 The name:values pairs in JavaScript objects are called properties:
@@ -39,14 +40,10 @@ A JavaScript object literal is a comma-separated list of name-value pairs wrappe
 You define (and create) a JavaScript object with an object literal:
 
 Object literals encapsulate data, enclosing it in a tidy package.
-This minimizes the use of global variables which can cause problems when combining code.
-</pre>
-                    `,
+This minimizes the use of global variables which can cause problems when combining code.`,
                     // end of body
                                 code: 
- `
-      <pre>
-  nomeDoObjeto = {
+ `nomeDoObjeto = {
       umaString: "valor da string valor da string valor da string valor da string valor da string valor da string valor da string valor da string ",
       umaFuncao: function() {
           console.log("Olá, mundo")
@@ -58,9 +55,7 @@ This minimizes the use of global variables which can cause problems when combini
         stringSimpatica: "tudo bem?"
       },
       umaBoolean: false
-  };
-      </pre>
-                `
+  };`
                 // end of code
                                 
                             },
@@ -68,6 +63,7 @@ This minimizes the use of global variables which can cause problems when combini
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Array (vetor)',
+								routes: ['Java', 'Tipos de Dados', 'Dados Não-Primitivos', 'Array'],
                                 body: '',
                                 code: ''
                             },
@@ -75,6 +71,7 @@ This minimizes the use of global variables which can cause problems when combini
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Function (function)',
+								routes: ['Java'],
                                 body: '',
                                 code: ''
                             }
@@ -84,11 +81,13 @@ This minimizes the use of global variables which can cause problems when combini
                         hasContent: false,
                         hasChildren: true,
                         title: 'Dados Primitivos',
+						routes: ['Java', 'Dados Primitivos'],
                         children: [
                             {
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'String (literal)',
+								routes: ['Java', 'Tipos de Dados', 'Dados Não-Primitivos', 'String'],
                                 body: '',
                                 code: ''
                             },
@@ -96,6 +95,7 @@ This minimizes the use of global variables which can cause problems when combini
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Boolean',
+								routes: ['Java', 'Tipos de Dados', 'Dados Primitivos', 'Boolean'],
                                 body: '',
                                 code: ''
                             },
@@ -103,6 +103,7 @@ This minimizes the use of global variables which can cause problems when combini
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Number (número)',
+								routes: ['Java', 'Tipos de Dados', 'Dados Primitivos', 'Números'],
                                 body: '',
                                 code: ''
                             },
@@ -110,6 +111,7 @@ This minimizes the use of global variables which can cause problems when combini
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'undefined (indefinido)',
+								routes: ['Java'],
                                 body: '',
                                 code: ''
                             }
@@ -128,40 +130,47 @@ This minimizes the use of global variables which can cause problems when combini
                 hasContent: false,
                 hasChildren: true,
                 title: 'Tipos de Dados',
+				routes: ['JavaScript', 'Tipos de Dados'],
                 children: [
                     {
                         hasContent: false,
                         hasChildren: true,
                         title: 'Dados Não-Primitivos',
+						routes: ['JavaScript', 'Dados Não-Primitivos'],
                         children: [
                             {
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Class',
                                 body: '',
+								routes: ['JavaScript'],
                                 code: ''
                             }, {
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Object',
+								routes: ['JavaScript', 'Tipos de Dados', 'Dados Não-Primitivos', 'Object'],
                                 body: '',
                                 code: ''
                             }, {
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Array',
+								routes: ['JavaScript', 'Tipos de Dados', 'Dados Não-Primitivos', 'Array'],
                                 body: '',
                                 code: ''
                             }, {
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'String',
+								routes: ['JavaScript', 'Tipos de Dados', 'Dados Primitivos', 'String (literal)'],
                                 body: '',
                                 code: ''
                             }, {
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Interface',
+								routes: ['JavaScript'],
                                 body: '',
                                 code: ''
                             }
@@ -171,28 +180,33 @@ This minimizes the use of global variables which can cause problems when combini
                         hasContent: false,
                         hasChildren: true,
                         title: 'Dados Primitivos',
+						routes: ['JavaScript', 'Dados Primitivos'],
                         children: [
                             {
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Boolean',
+								routes: ['JavaScript', 'Tipos de Dados', 'Dados Primitivos', 'Boolean'],
                                 body: '',
                                 code: ''
                             }, {
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Char',
+								routes: ['JavaScript', 'Tipos de Dados', 'Dados Primitivos', 'String (literal)'],
                                 body: '',
                                 code: ''
                             }, {
                                 hasContent: false,
                                 hasChildren: true,
                                 title: 'Números',
+								routes: ['JavaScript', 'Tipos de Dados', 'Dados Primitivos', 'Number (número)'],
                                 children: [
                                     {
                                         hasContent: true,
                                         hasChildren: false,
                                         title: 'Tipos Inteiros',
+										routes: ['JavaScript', 'Tipos de Dados', 'Dados Primitivos', 'Number (número)'],
                                         body: `
                                         "Byte","Short","Int","Long"                                        
                                         ` ,
@@ -202,6 +216,7 @@ This minimizes the use of global variables which can cause problems when combini
                                         hasContent: true,
                                         hasChildren: false,
                                         title: 'Tipos Floating-Point',
+										routes: ['JavaScript', 'Tipos de Dados', 'Dados Primitivos', 'Number (número)'],
                                         body: `
                                         "Float","Double"
                                         `,

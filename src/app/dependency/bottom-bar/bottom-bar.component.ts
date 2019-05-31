@@ -18,13 +18,13 @@ export class BottomBarComponent implements OnInit {
   public searchControl: FormControl;
 
   constructor(
-    private queryService: QuerySenderService,
+    private querySenderSrvc: QuerySenderService,
     private router: Router) {
     this.searchControl = new FormControl();
   }
 
   userIsTyping() {
-    this.queryService.userTypes(true);
+    this.querySenderSrvc.emitUserIsTyping(true);
   }
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class BottomBarComponent implements OnInit {
       Once the variable is updated, the service emits an event
       for the searchPage to subscribe to
     */
-      this.queryService.newQuery(param);
+      this.querySenderSrvc.emitNewQuery(param);
     });
 
   }

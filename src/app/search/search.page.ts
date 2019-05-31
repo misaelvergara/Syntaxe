@@ -2,7 +2,7 @@
   This page implements two services through dependency injection. These services
   are then used to display a list of queried elements by the user.
 
-  . coreDataSrvcService
+  . coreDataSrvc
   is responsile for providing a method that allows the page to search through an array
   of data that contains many objects. The method returns an array according to the passed
   parameter.
@@ -14,7 +14,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreDataService } from '../dependency/core-data.service';
 import { QuerySenderService } from '../dependency/query-sender.service';
-import { PARAMETERS } from '@angular/core/src/util/decorators';
 
 @Component({
   selector: 'app-search',
@@ -27,9 +26,9 @@ export class SearchPage implements OnInit {
     a singleton across all components) of search service */
   constructor(
     private coreDataSrvc: CoreDataService,
-    private queryService: QuerySenderService) {
+    private querySrvc: QuerySenderService) {
   }
-  public receivedItems: any;
+  public retrievedComponentList: any;
   public userIsTyping = false;
   public canDisplaySecHeader = false;
   public outputHeader: string;
@@ -45,7 +44,7 @@ export class SearchPage implements OnInit {
       gets notified if the user is typing
       @param returns a boolean
      */
-    this.queryService.userIsTyping.subscribe(param => {
+    this.querySrvc.hasEmittedUserIsTyping.subscribe(param => {
       this.userIsTyping = param;
       if (param) {
         this.resultHeader = 'Pesquisando...';
@@ -56,7 +55,7 @@ export class SearchPage implements OnInit {
     /*
       subscribes to changes in the query
     */
-    this.queryService.query.subscribe((param: string) => {
+    this.querySrvc.hasEmittedQuery.subscribe((param: string) => {
       // changes were made, so:
 
       // checks if string contains only whitespace
@@ -64,7 +63,7 @@ export class SearchPage implements OnInit {
         this.canDisplaySecHeader = false;
         this.resultHeader = 'Pesquisa inválida.';
         // tells the QuerySenderService to emit that the user is no longer typing
-        this.queryService.userTypes(false);
+        this.querySrvc.emitUserIsTyping(false);
         return;
       } else {
         this.canDisplaySecHeader = true;
@@ -76,9 +75,9 @@ export class SearchPage implements OnInit {
         as an array
       */
       this.coreDataSrvc.filter.ask(param);
-      this.receivedItems = this.coreDataSrvc.filter.retrieve();
+      this.retrievedComponentList = this.coreDataSrvc.filter.retrieve();
 
-      const length = this.receivedItems.length;
+      const length = this.retrievedComponentList.length;
       if (length > 1) {
         this.resultHeader = `Foram encontrados (${length}) resultados.`;
       } else if (length > 0) {
@@ -89,7 +88,7 @@ export class SearchPage implements OnInit {
 
       // search is done
       // tells the QuerySenderService to emit that the user is no longer typing
-      this.queryService.userTypes(false);
+      this.querySrvc.emitUserIsTyping(false);
     });
   }
 }

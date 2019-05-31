@@ -4,6 +4,37 @@
   background: -webkit-linear-gradient($deg, $col1 0%, $col2 100%);
   background: linear-gradient($deg, $col1 0%, $col2 100%);
 }
+@keyframes fade {
+  0% {
+    opacity: 0.5;
+  }
+  30% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadea {
+  0% {
+    opacity: 0.5;
+  }
+  30% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-button{
+  animation: fade 1s 1;
+}
+
+.fade-button-force {
+  animation: fadea 1s 1;
+}
 
 .comp-icon-holder {
   background: black;
@@ -13,7 +44,14 @@
   padding: 4px 2px;
   margin: 0px;
   border-radius: 0px;
-  transition: all 0.45s cubic-bezier(1, 0.39, 0, 1.05);
+  transition: all 0.25s cubic-bezier(1, 0.39, 0, 1.05);
+}
+
+.no-wordbreak {
+  white-space: pre !important; /* CSS3 */
+  white-space: -moz-pre !important; /* Firefox */
+  white-space: -pre !important; /* Opera <7 */
+  white-space: -o-pre !important; /* Opera 7 */
 }
 
 .comp-icon-holder-invert {

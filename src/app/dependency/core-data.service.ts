@@ -5,7 +5,7 @@
   main array.
 */
 import { Injectable } from '@angular/core';
-import ComponentData from '../component/component.data.raw';
+import ComponentData from './component-data';
 
 @Injectable({
   providedIn: 'root'
@@ -14,27 +14,34 @@ export class CoreDataService {
 
   private componentData = new ComponentData();
 
-  private resultArray = [];
-  private sortArray = [];
+  private resultsArray = [];
+  private sortedListArray = [];
+  private forceBreakLoop = false;
+  private globalQueryTerm: string;
+  private globalCurrIteration: number;
   public filter = {
-    lengthOfDescpt: 150,
-    setTitle: true,
-    setContent: true,
-    setCode: false,
+    descptLength: 150,
+    titleIsSet: true,
+    contentIsSet: true,
+    codeIsSet: false,
+    listWasRetrieved: false,
     ask: (term) => {
-      this.resultArray = [];
-      this.filterData(this.componentData.array, term);
+      this.resultsArray = [];
+      this.filterComponentData(this.componentData.array, term);
     },
-    askForComponent: (ref: any[]) => {
-      this.resultArray = [];
-      this.filterForComponent(this.componentData.array, ref);
+    requestComponent: (ref: any[]) => {
+      this.resultsArray = [];
+      this.getComponentProperties(this.componentData.array, ref);
     },
-    askForList: () => this.sort(this.componentData.array),
-    retrieve: () => this.resultArray,
-    retrieveList: () => this.sortArray
+    requestSortedList: () => this.sortList(this.componentData.array),
+    retrieve: () => this.resultsArray,
+    retrieveSortedList: () => {
+      this.filter.listWasRetrieved = true;
+      return this.sortedListArray;
+    }
   };
 
-  private filterData(searchable: any[], term: string, ref = []): void {
+  private filterComponentData(searchable: any[], term: string, ref = []): void {
     /*
     searchable[0].name
     <array>[index] returns an object
@@ -49,27 +56,27 @@ export class CoreDataService {
     // length of the searchable array
     const length = searchable.length;
     let obj;
-    let foundInContent = false;
-    let foundInCode = false;
-    let foundInTitle = false;
 
     /*
       Loops through the existing objects inside the searchable array
     */
     for (let i = 0; i < length; i++) {
-      if (this.filter.setTitle) {
+		let foundInContent = false;
+		let foundInCode = false;
+		let foundInTitle = false;
+      if (this.filter.titleIsSet) {
         // checks for term in the title property of the object
-        foundInTitle = this.checkString(searchable[i].title || '', term);
+        foundInTitle = this.matchStrings(searchable[i].title || '', term);
       }
-      if (this.filter.setContent) {
+      if (this.filter.contentIsSet) {
         // checks for term in the body property of the object
         if (searchable[i].hasContent) {
-          foundInContent = this.checkString(searchable[i].body || '', term);
+          foundInContent = this.matchStrings(searchable[i].body || '', term);
         }
       }
-      if (this.filter.setCode) {
+      if (this.filter.codeIsSet) {
         // checks for term in the code property of the object
-        foundInCode = this.checkString(searchable[i].code || '', term);
+        foundInCode = this.matchStrings(searchable[i].code || '', term);
       }
 
       // checks whether the term was found
@@ -78,13 +85,13 @@ export class CoreDataService {
         obj = {
           title: searchable[i].title,
           descpt: searchable[i].hasContent ?
-            `${searchable[i].body.slice(0, this.filter.lengthOfDescpt)}...`
+            `${searchable[i].body.slice(0, this.filter.descptLength)}...`
             : '',
           tree: ref.concat(searchable[i].title)
         };
 
         // populates the resultArray with proper results
-        this.resultArray = this.resultArray.concat(obj);
+        this.resultsArray = this.resultsArray.concat(obj);
       }
 
       /*
@@ -98,60 +105,102 @@ export class CoreDataService {
             property referencing its inheritance.
 
         */
-        this.filterData(searchable[i].children, term, ref.concat(searchable[i].title));
+        this.filterComponentData(searchable[i].children, term, ref.concat(searchable[i].title));
       }
 
     }
   }
-
-  private filterForComponent(searchable: any[], ref = [], curIteration = 0): void {
-
+/*
+  finds and retrieves component data
+*/
+  private getComponentProperties(searchable: any[], ref = [], curIteration = 0, insertableFunctionId = -1): void {
+	let functionId = insertableFunctionId + 1;
+	
     // length of the searchable array
     const length = searchable.length;
     let obj;
-    let foundInTitle = false;
     let term: string;
+	/*
+		tenho um problema
+		a variavel curIteration é individual a cada instância da função
+		ou seja, a cada recursion da função, temos uma variável curIteration para seu escopo
+		
+		o que quero é o seguinte: quando a palavra for encontrada,
+		a variavel aumenta globalmente em todas as instancias da função
+		Portanto:
+		quando a função começa, a variável é definida globalmente pela primeira vez
+		Logo, então: 
+		todas as instâncias da função são afetadas
+	*/
+	this.globalCurrIteration = curIteration;
+	console.log('curr iteration changes: ' + this.globalCurrIteration);
 
     /*
       Loops through the existing objects inside the searchable array
     */
     for (let i = 0; i < length; i++) {
       /*The last key of the array passed through the 'ref' parameter
-        is the object we are trying to access through the filterData method.
+        is the object we are trying to access through the getComponentProperties method.
         Each key in the array, counting down from the last key, represents a
         parent object that contains the target object. That way, a[0] contains a[1]
         and a[1] contains a[2], and so on..*/
-      term = ref[curIteration];
-      foundInTitle = searchable[i].title == term;
+      term = ref[this.globalCurrIteration];
+      let foundInTitle = searchable[i].title == term;
+	  console.log('(' + functionId + ') ' + '(' + this.globalCurrIteration + ')' +
+	  'term of current iteration: '+term+' for '+searchable[i].title+'\n  foundInTitle: '+foundInTitle);
       // checks if the term was found
       if (foundInTitle) {
         // checks if the last iteration of the reference array was reached
-        if (curIteration == ref.length - 1) {
+        if (this.globalCurrIteration == ref.length - 1) {
           // fills the object with proper properties for the component page to handle
           obj = {
+			routes: searchable[i].routes,
             title: searchable[i].title,
-            body: searchable[i].hasContent ? `${searchable[i].body}` : 'Página inválida',
-            code: (typeof searchable[i].code === 'undefined') ? 'Página inválida' : `${searchable[i].code}`,
-            tree: ref
+			
+            body: searchable[i].hasContent ? 
+			`${searchable[i].body}` 
+			: `Ainda não temos código disponível para a página '${searchable[i].title}'.`,
+			
+            code: (typeof searchable[i].code === 'undefined') ? 
+			`Desculpe! Ainda não temos conteúdo disponível para a página '${searchable[i].title}'.`
+			: `${searchable[i].code}`,
+			
+            tree: ref,
           };
-          this.resultArray = this.resultArray.concat(obj);
+          this.resultsArray = this.resultsArray.concat(obj);
           console.log(obj);
+		  /*
+			this forces other iterations of the loop to break once the requested data was found
+		  */
+		  this.forceBreakLoop = true;
+		  break;
         } else {
           // else, iterates again, increasing the value of curIteration
-          ++curIteration;
+          ++this.globalCurrIteration;
         }
 
       }
 
       // checks if the searchable array has any iterable arrays
-      if (searchable[i].hasChildren) {
-        this.filterForComponent(searchable[i].children, ref, curIteration);
+	  /* also checks
+		if the globalCurrIteration variable changes, then the searched term was matched and the
+		function is trying to search for the next term 
+	  */
+      if (searchable[i].hasChildren && this.globalCurrIteration != functionId) {
+        this.getComponentProperties(searchable[i].children, ref, this.globalCurrIteration, functionId);
       }
+	  /*
+		this forces other iterations of the loop to break once the requested data was found
+	  */
+	  if (this.forceBreakLoop) {
+		  this.forceBreakLoop = false;
+		  break;
+	  }
 
     }
   }
 
-  private sort(searchable: any[], ref = []): void {
+  private sortList(searchable: any[], ref = []): void {
     const length = searchable.length;
     let obj;
 
@@ -166,25 +215,25 @@ export class CoreDataService {
       };
 
       // populates the resultArray with proper results
-      this.sortArray = this.sortArray.concat(obj);
+      this.sortedListArray = this.sortedListArray.concat(obj);
 
 
       /*
           checks if the searchable array has any iterable arrays
       */
       if (searchable[i].hasChildren) {
-        this.sort(searchable[i].children, ref.concat(searchable[i].title));
+        this.sortList(searchable[i].children, ref.concat(searchable[i].title));
       }
     }
   }
 
   public addBrackets(param: any[]) {
-    return `['`+param.join(`','`)+`']`;
+    return `['` + param.join(`','`) + `']`;
   }
 
 
 
-  private checkString(p1: string, p2: string) {
+  private matchStrings(p1: string, p2: string) {
     return p1.toLowerCase().indexOf(p2.toLowerCase()) > -1;
   }
   constructor() {

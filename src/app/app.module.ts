@@ -8,7 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { BottomBarModule } from './dependency/bottombar/bottom-bar.module';
+import { BottomBarModule } from './dependency/bottom-bar/bottom-bar.module';
 
 @NgModule({
   declarations: [

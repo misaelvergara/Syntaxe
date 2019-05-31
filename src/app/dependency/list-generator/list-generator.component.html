@@ -1,0 +1,27 @@
+<ion-list>
+  <ion-card *ngFor="let index of iterableList">
+    <!-- item container -->
+    <ion-item detail="false" class="list-header-title-background"
+      [class.background-high-hierarchy]="index.tree.length == 1" [lines]="(index.tree.length == 1) ? 'none' : 'full'"
+      [routerLink]="['/component', addBrackets(index.tree)]">
+      <!-- advance arrow icon -->
+      <ion-icon [color]="(index.tree.length == 1) ? 'light' : 'primary'" name="md-arrow-round-forward"
+        [slot]="(index.tree.length == 1) ? 'start' : 'end'"></ion-icon>
+      <!-- title -->
+      <ion-label [class]="(index.tree.length == 1) ? 'title-high-hierarchy' : 'list-header-title'">{{ index.title }}
+      </ion-label>
+    </ion-item>
+    <!-- item container -->
+    <ion-item detail="false" *ngIf="index.tree.length != 1"
+      [lines]="searchEnabled && index.descpt!='' ? 'inset' : 'none'">
+      <!-- hierarchy icon -->
+      <ion-icon name="md-git-network" color="light-grey" slot="end"></ion-icon>
+      <!-- hierarchy list -->
+      <ion-label class="hierachy-horizontal-list">{{ index.tree.join(' / ') }}</ion-label>
+    </ion-item>
+    <!-- description -->
+    <ion-card-content *ngIf="index.descpt">
+      <ion-label>{{ index.descpt }}</ion-label>
+    </ion-card-content>
+  </ion-card>
+</ion-list>

@@ -10,66 +10,67 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-@import url('https://fonts.googleapis.com/css?family=Crete+Round|Exo+2');
+@import url("https://fonts.googleapis.com/css?family=Crete+Round|Exo+2");
 
 @mixin wordbreak {
-    white-space: pre-wrap;      /* CSS3 */   
-   white-space: -moz-pre-wrap; /* Firefox */    
-   white-space: -pre-wrap;     /* Opera <7 */   
-   white-space: -o-pre-wrap;   /* Opera 7 */    
-   word-wrap: break-word; 
+  white-space: pre-wrap; /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap; /* Opera <7 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word;
 }
 
 @mixin bg_grad($deg, $col1, $col2) {
-    background: $col1;
-    background: -moz-linear-gradient($deg, $col1 0%, $col2 100%);
-    background: -webkit-linear-gradient($deg, $col1 0%, $col2 100%);
-    background: linear-gradient($deg, $col1 0%, $col2 100%);
-  }
+  background: $col1;
+  background: -moz-linear-gradient($deg, $col1 0%, $col2 100%);
+  background: -webkit-linear-gradient($deg, $col1 0%, $col2 100%);
+  background: linear-gradient($deg, $col1 0%, $col2 100%);
+}
 
 .codeCard {
-    @include bg_grad(160deg,rgb(104, 16, 16),rgb(53, 19, 19));
-    color: rgb(187, 187, 187);
-    padding: 1px 10px;
-    height: 36vh;
-    max-height: 100%;
-    transition: height, opacity, 0.45s cubic-bezier(1, 0.39, 0, 1.05);
-    opacity: 1; 
+  @include bg_grad(160deg, rgb(104, 16, 16), rgb(53, 19, 19));
+  color: rgb(187, 187, 187);
+  padding: 1px 10px;
+  height: 36vh;
+  max-height: 100%;
+  transition: height, opacity, 0.25s cubic-bezier(1, 0.39, 0, 1.05);
+  opacity: 1;
+  overflow: scroll;
 }
 
 pre {
-    margin: 0px 0px 0px 0px !important;
+  margin: 0px 0px 0px 0px !important;
 }
 
 .codeCard pre {
-    @include wordbreak();
-    height: 100%;
-    max-height: 100%;
-    text-align: left;
+  @include wordbreak();
+  height: 100%;
+  max-height: 100%;
+  text-align: left;
 }
 
 .bodyCard pre {
-    @include wordbreak();
-    font-family: Arial;
+  @include wordbreak();
+  font-family: Arial;
 }
 
 .animateCodeCard {
-    height: 0px;
-    opacity: 0;
+  height: 0px;
+  opacity: 0;
 }
 
 .searchbar {
   border-radius: 100px;
   color: white;
   text-align: center;
-  @include bg_grad(45deg,#000000,#920000);
+  @include bg_grad(45deg, #000000, #920000);
   margin: 5px 0 5px 0;
 }
 
 .searching {
-    flex-flow: column nowrap;
-    justify-content: center;
-    display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  display: flex;
 }
 
 /*
@@ -77,50 +78,62 @@ pre {
 */
 
 .hierachy-horizontal-list {
-    @include bg_grad(-30deg, #efefef, #f5e2e2);
-    --ion-item-color: rgb(63, 58, 58) !important;
-    --color: rgb(63, 58, 58) !important;
-    --ion-text-color: rgb(63, 58, 58) !important;
-    --ion-item-background: none !important;
-    --ion-item-background-color: none !important;
-    padding: 5px 10px !important;
-    margin-left: 10px !important;
-    border-radius: 100px !important;
-    font-size: 14px !important;
-    white-space: nowrap !important;
-    overflow-x: scroll !important;
-    word-break: keep-all !important;
-    text-overflow: clip !important;
-    
-  }
-  
-  .list-header-title-background {
-    --ion-item-background: none;
-    --ion-item-background-color: none;
-    @include bg_grad(-25deg, #ffffff, #f7eeee);
-  }
-  
-  .background-high-hierarchy {
-    --ion-item-background: none;
-    --ion-item-background-color: none;
-    @include bg_grad(-25deg, #696969, #b75e5e);
-  }
+  @include bg_grad(-30deg, #efefef, #f5e2e2);
+  --ion-item-color: rgb(63, 58, 58) !important;
+  --color: rgb(63, 58, 58) !important;
+  --ion-text-color: rgb(63, 58, 58) !important;
+  --ion-item-background: none !important;
+  --ion-item-background-color: none !important;
+  padding: 5px 10px !important;
+  margin-left: 10px !important;
+  border-radius: 100px !important;
+  font-size: 14px !important;
+  white-space: nowrap !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  text-overflow: clip !important;
+}
 
-  .title-high-hierarchy {
-      --ion-item-background: none !important;
-      --ion-item-background-color: none !important;
-      color: #f4f5f8 !important;
-      font-size: 16px;
-      font-weight: bold;
-    }
-    
-  
-  .list-header-title {
-    --ion-item-background: none !important;
-    --ion-item-background-color: none !important;
-    color: #424242 !important;
-    font-size: 16px;
-    letter-spacing: 1px;
-    font-weight: bold;
-  }
-  
+.list-header-title-background {
+  --ion-item-background: none;
+  --ion-item-background-color: none;
+  @include bg_grad(-25deg, #ffffff, #f7eeee);
+}
+
+.background-high-hierarchy {
+  --ion-item-background: none;
+  --ion-item-background-color: none;
+  @include bg_grad(-25deg, #696969, #b75e5e);
+}
+
+.title-high-hierarchy {
+  --ion-item-background: none !important;
+  --ion-item-background-color: none !important;
+  color: #f4f5f8 !important;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.list-header-title {
+  --ion-item-background: none !important;
+  --ion-item-background-color: none !important;
+  color: #424242 !important;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+// hides scrollbar
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
+/* this declares a class for the color light grey */
+.ion-color-light-grey {
+  --ion-color-base: var(--ion-color-light-grey) !important;
+  --ion-color-base-rgb: var(--ion-color-light-grey-rgb) !important;
+  --ion-color-contrast: var(--ion-color-light-grey-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-redgrad-light-grey-rgb) !important;
+  --ion-color-shade: var(--ion-color-light-grey-shade) !important;
+  --ion-color-tint: var(--ion-color-light-grey-tint) !important;
+}
