@@ -13,7 +13,7 @@ export class TreeComponent implements OnInit {
   sliceRouterParam(lastIndex: number) {
     const tree = this.tree.slice(0, lastIndex + 1);
 
-    return this.coreDataSrvc.addBrackets(tree);
+    return this.coreDataSrvc.formatForRouter(tree);
   }
 
   ngOnInit() {}

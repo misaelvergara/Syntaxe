@@ -13,33 +13,32 @@
                 ########################################################
             -->
             <ion-col class="flex-header" no-padding>
-                <div  [class.codeCard]="true" [class.animateCodeCard]="expandsCode" no-padding>
+                <div  [class.codeCard]="true" [class.animateCodeCard]="codeIsExpanded" no-padding>
                     <!-- headerCode output -->
                     <pre [class.no-wordbreak]="!wordbreakIsOn" [innerHTML]="headerCode"></pre>
                 </div>
 
-                <div class="comp-icon-holder" [class.comp-icon-holder-invert]="expandsCode">
+                <div class="comp-icon-holder" [class.comp-icon-holder-invert]="codeIsExpanded">
                     <!-- tells angular to listen for changes @ $event-->
                     <ion-button (click)="showTreePopup($event)" fill="clear" color="tertiary" size="small"
-                    [class.fade-button-force]="!expandsCode" [class.fade-button]="expandsCode">
+                    [class.fade-button-force]="!codeIsExpanded" [class.fade-button]="codeIsExpanded">
                         <ion-icon slot="icon-only" name="git-network"></ion-icon>
                     </ion-button>
 
                     <ng-template [ngIf]="showExpandButton">
                         <!-- copy button -->
                         <ion-button 
-                        [class.fade-button-force]="!expandsCode" [class.fade-button]="expandsCode"
+                        [class.fade-button-force]="!codeIsExpanded" [class.fade-button]="codeIsExpanded"
                         (click)="toggleWordbreak()" fill="clear" color="tertiary" size="small">
-                            <ion-icon *ngIf="wordbreakIsOn" slot="icon-only" name="ios-return-left"></ion-icon>
-                            <ion-icon *ngIf="!wordbreakIsOn" slot="icon-only" name="ios-return-right"></ion-icon>
+                            <ion-icon slot="icon-only" name="ios-swap"></ion-icon>
                         </ion-button>
                         <!-- expand button -->
-                        <ion-button [class.fade-button-force]="!expandsCode" [class.fade-button]="expandsCode"
+                        <ion-button [class.fade-button-force]="!codeIsExpanded" [class.fade-button]="codeIsExpanded"
                         fill="clear" color="tertiary" size="small" *ngIf="showExpandButton"
-                            (click)="toggleExpandsCode()">
-                            <ion-icon slot="icon-only" [style.display]="expandsCode ? ['none'] : ['block']"
+                            (click)="togglecodeIsExpanded()">
+                            <ion-icon slot="icon-only" [style.display]="codeIsExpanded ? ['none'] : ['block']"
                                 name="md-arrow-dropup"></ion-icon>
-                            <ion-icon slot="icon-only" [style.display]="expandsCode ? ['block'] : ['none']"
+                            <ion-icon slot="icon-only" [style.display]="codeIsExpanded ? ['block'] : ['none']"
                                 name="md-arrow-dropdown"></ion-icon>
                         </ion-button>
                     </ng-template>
@@ -64,7 +63,11 @@
     -->
     <ion-item>
         <ion-label>Conteúdo em:</ion-label>
-        <ion-select slot="end" (ionChange)="redirectToSelectedLanguage()" [(ngModel)]="currentContentLanguage" [interfaceOptions]="customActionSheetOptions" interface="action-sheet"
+        <ion-select class="language-selector" slot="end" 
+		(ionChange)="redirectToSelectedLanguage()" 
+		[(ngModel)]="language" 
+		[interfaceOptions]="customActionSheetOptions" 
+		interface="action-sheet"
             placeholder="Select One">
             <ion-select-option value="JavaScript">JavaScript</ion-select-option>
             <ion-select-option value="Java">Java</ion-select-option>

@@ -34,8 +34,8 @@ export class SearchPage implements OnInit {
   public outputHeader: string;
   public resultHeader: string;
 
-  public addBrackets(param) {
-    return this.coreDataSrvc.addBrackets(param);
+  public formatForRouter(param) {
+    return this.coreDataSrvc.formatForRouter(param);
   }
 
   ngOnInit() {

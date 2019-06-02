@@ -1,11 +1,11 @@
 <ion-toolbar>
-  <ion-title [class.center]="true">
+  <ion-title class="center">
     <div *ngIf="showsAppName">
-      <span [class.black]="true">synt</span>
-      <span [class.red]="true">axe</span>
-      <span [class.black]="true">.</span>
+      <span class="black">synt</span>
+      <span class="red">axe</span>
+      <span class="black">.</span>
     </div>
-    <div *ngIf="!showsAppName">
+    <div class="left" *ngIf="!showsAppName">
       {{ insertableTitle }}
     </div>
   </ion-title>

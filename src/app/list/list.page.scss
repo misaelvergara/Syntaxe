@@ -1,0 +1,9 @@
+.list-progress {
+	height: 100%;
+	transition: all 0.45s ease-out;
+}
+
+.hide-list-progress {
+	height: 0px !important;
+	opacity: 0;
+};

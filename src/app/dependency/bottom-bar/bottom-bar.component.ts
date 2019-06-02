@@ -26,6 +26,10 @@ export class BottomBarComponent implements OnInit {
   userIsTyping() {
     this.querySenderSrvc.emitUserIsTyping(true);
   }
+  
+  clearSearchBar() {
+	  this.searchControl.setValue('');
+  }
 
   ngOnInit() {
     this.searchControl.valueChanges.pipe(debounceTime(875)).subscribe(param => {

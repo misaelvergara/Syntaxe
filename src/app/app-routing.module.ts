@@ -7,13 +7,13 @@ const routes: Routes = [
   { path: 'component', loadChildren: './component/component.module#ComponentPageModule' },
   { path: 'search', loadChildren: './search/search.module#SearchPageModule' },
   { path: 'list', loadChildren: './list/list.module#ListPageModule' },
-  { path: '**', loadChildren: './home/home.module#HomePageModule' },
+  { path: '**', loadChildren: './log/log.module#LogPageModule' },
 
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, onSameUrlNavigation: 'reload' })
   ],
   exports: [RouterModule]
 })

@@ -3,33 +3,32 @@
 </ion-header>
 <ion-content [scrollY]="true">
   <ion-card [routerLink]="['/search']">
-    <ion-card-header>
+    <ion-card-header class="home-card-header">
       <ion-card-title>Introdução</ion-card-title>
     </ion-card-header>
-    <ion-item>
+    <ion-item lines="full">
       <ion-icon name="arrow-dropright-circle" slot="start"></ion-icon>
       <ion-label>Bem-vindo ao Syntaxe!</ion-label>
       <ion-button slot="end">INICIAR</ion-button>
     </ion-item>
 
     <ion-card-content>
-      Preparamos um guia para você fazer o melhor uso de nosso app. Todos os detalhes que você precisa
-      saber estão aqui.
+      Guia que abrange as funcionalidades do aplicativo. Primeiros passos e sugestões de uso. 
     </ion-card-content>
   </ion-card>
 
   <ion-card [routerLink]="['/list']">
-    <ion-card-header>
-      <ion-card-title>Guia de Conceitos</ion-card-title>
+    <ion-card-header class="home-card-header">
+      <ion-card-title>Sumário</ion-card-title>
     </ion-card-header>
-    <ion-item>
+    <ion-item lines="full">
       <ion-icon name="arrow-dropright-circle" slot="start"></ion-icon>
-      <ion-label>Índice de todos os conceitos abrangidos</ion-label>
+      <ion-label>Explore!</ion-label>
       <ion-button fill="outline" slot="end">ABRIR</ion-button>
     </ion-item>
 
     <ion-card-content>
-      Descrição...
+		Lista de todos os conceitos abordados - encontre-os em uma lista organizada por tópicos. Se precisar de direção, é só clicar aqui! 
     </ion-card-content>
   </ion-card>
 </ion-content>

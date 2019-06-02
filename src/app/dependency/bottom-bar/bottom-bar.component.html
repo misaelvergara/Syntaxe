@@ -7,7 +7,24 @@
     <!--<ion-button style="margin-right: 14px;" color="dark" size="small" slot="end" fill="outline">
       <ion-icon slot="icon-only" name="close"></ion-icon>
     </ion-button>-->
+	
+	<!-- home button -->
+	<ion-button [routerLink]="['/home']" color="primary" size="small" slot="start" fill="clear">
+      <ion-icon slot="icon-only" name="home"></ion-icon>
+    </ion-button>
+	
+	<!-- search bar -->
+	<div slot="end" style="
+	width: 50% !important;
+	margin-right: 8px;
+	
+  ">  
   <ion-input
-  [class.searchbar]="true" (click)="goToSearchPage()" color="light" slot="end" placeholder="Pesquisar.."
-  [formControl]="searchControl" (ionChange)="userIsTyping()"></ion-input>
+  [class.searchbar]="true" (click)="goToSearchPage()" color="light-grey" slot="end" placeholder="Pesquisar.."
+  [formControl]="searchControl" (ionChange)="userIsTyping()"></ion-input></div>
+  <!-- clear button -->
+	<ion-button (click)="clearSearchBar()" color="light-grey" size="small" slot="end" fill="clear">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+  
 </ion-toolbar>

@@ -31,7 +31,8 @@
   @include bg_grad(160deg, rgb(104, 16, 16), rgb(53, 19, 19));
   color: rgb(187, 187, 187);
   padding: 1px 10px;
-  height: 36vh;
+  height: 35vh;
+  width: 100vw;
   max-height: 100%;
   transition: height, opacity, 0.25s cubic-bezier(1, 0.39, 0, 1.05);
   opacity: 1;
@@ -63,7 +64,7 @@ pre {
   border-radius: 100px;
   color: white;
   text-align: center;
-  @include bg_grad(45deg, #000000, #920000);
+  @include bg_grad(45deg, rgba(0, 0, 0, 1), rgba(146,0,0,1));
   margin: 5px 0 5px 0;
 }
 
@@ -136,4 +137,44 @@ pre {
   --ion-color-contrast-rgb: var(--ion-color-redgrad-light-grey-rgb) !important;
   --ion-color-shade: var(--ion-color-light-grey-shade) !important;
   --ion-color-tint: var(--ion-color-light-grey-tint) !important;
+}
+
+// logger container background
+
+.error-container pre {
+	padding: 20px 0;
+	@include bg_grad(145deg, rgba(0, 0, 0, 1), rgba(146,0,0,1));
+	@include wordbreak;
+	color: rgb(187, 187, 187) !important;
+	font-size: 10px;
+}
+
+.tree-popover .popover-content{ width: 75vw !important;}
+
+.home-card-header {
+	--background: linear-gradient(45deg, rgba(0, 0, 0, 0.2) 0%, rgba(113,2,2,0.1) 100%) !important;
+	    --color: rgb(43, 43, 43);
+}
+
+.tree-title {	
+	font-weight: bold !important;
+	letter-spacing: 1px !important;
+	@include bg_grad(-25deg, #696969, #b75e5e);
+	--ion-item-background: none !important;
+  --ion-item-background-color: none !important;
+}
+
+.tree-items {
+	padding-left: 6px !important;
+}
+
+.language-selector {
+	background: #000 !important;
+    padding: 4px 10px !important;
+    border-radius: 5px !important;
+    margin-right: 10px !important;
+	color: rgb(187, 187, 187);
+    font-family: 'Crete Round';
+    font-size: 16px;
+	align-items: center !important;
 }

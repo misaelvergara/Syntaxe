@@ -156,7 +156,7 @@ This minimizes the use of global variables which can cause problems when combini
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Array',
-								routes: ['JavaScript', 'Tipos de Dados', 'Dados Não-Primitivos', 'Array'],
+								routes: ['JavaScript', 'Tipos de Dados', 'Dados Não-Primitivos', 'Array (vetor)'],
                                 body: '',
                                 code: ''
                             }, {

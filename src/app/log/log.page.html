@@ -1,0 +1,13 @@
+<ion-header>
+  <app-topbar [showsAppName]="false" [insertableTitle]="['Ocorreram alguns problemas:']" [showsBackButton]="false"></app-topbar>
+</ion-header>
+
+<ion-content class="error-container">
+	<pre class="error-item">{{ log }}</pre>
+</ion-content>
+
+<ion-footer class="ion-text-center go-to-home">
+	<ion-button [routerLink]="['/home']">
+		Ir para a página inicial
+	</ion-button>
+</ion-footer>

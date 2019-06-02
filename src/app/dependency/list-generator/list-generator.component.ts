@@ -13,8 +13,8 @@ export class GenerateListComponent implements OnInit {
   // dependency injection: imports CoreDataService
   constructor(private coreDataSrvc: CoreDataService) { }
 
-  public addBrackets(param) {
-    return this.coreDataSrvc.addBrackets(param);
+  public formatForRouter(param) {
+    return this.coreDataSrvc.formatForRouter(param);
   }
 
   ngOnInit() {}

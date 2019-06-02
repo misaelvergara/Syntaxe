@@ -14,6 +14,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CoreDataService } from '../dependency/core-data.service';
+import { ErrorLoggerService } from '../dependency/error-logger.service';
+
 import { PopoverController } from '@ionic/angular';
 import { TreeComponent } from './tree/tree.component';
 
@@ -23,7 +25,7 @@ import { TreeComponent } from './tree/tree.component';
   styleUrls: ['./component.page.scss'],
 })
 export class ComponentPage implements OnInit {
-  public expandsCode = false;
+  public codeIsExpanded = false;
   public showExpandButton = true;
   // retrieves an array of a single object
   public retrievedObject: any[];
@@ -32,11 +34,12 @@ export class ComponentPage implements OnInit {
 
   /* angular template settings
     @explanation: strings that are interpolated in the template */
-  public contentTitle = 'unavailable';
-  public headerCode = 'unavailable';
-  public contentBody = 'unavailable';
-  public getCurrentLanguageFromTree = 'JavaScript';
-  public contentRoutes = ['JavaScript'];
+  public contentTitle = 'loading..';
+  public headerCode = 'loading..';
+  public contentBody = 'loading..';
+  public componentTree: any[];
+  public language: string;
+  public contentRoutes: any[];
 
   customActionSheetOptions: any = {
     header: 'Linguagem atual',
@@ -47,36 +50,45 @@ export class ComponentPage implements OnInit {
     ####### METHODS ##########################################
     #########################################################
    */
-  
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private coreDataSrvc: CoreDataService,
-    private popoverCtrl: PopoverController
+    private popoverCtrl: PopoverController,
+    private errorLoggerSrvc: ErrorLoggerService
   ) { }
 
+  public formatForRouter(param) {
+    this.errorLoggerSrvc.sendNewLog('formatting.. At: component.page');
+    return this.coreDataSrvc.formatForRouter(param);
+  }
+
   public redirectToSelectedLanguage() {
-	  console.log('["'+this.contentRoutes.join('", "')+'"]');
-    this.router.navigate(['/component', '["'+this.contentRoutes.join('", "')+'"]']);
+    const targetRoute = this.formatForRouter(this.contentRoutes);
+    // picked language is different from the component language
+    if (this.language != this.componentTree[0]) {
+      this.router.navigate(['/component', targetRoute]);
+    }
   }
 
   public toggleWordbreak() {
     this.wordbreakIsOn = !this.wordbreakIsOn;
-    console.log(this.wordbreakIsOn);
   }
 
-  public toggleExpandsCode() { this.expandsCode = !this.expandsCode; }
+  public togglecodeIsExpanded() { this.codeIsExpanded = !this.codeIsExpanded; }
 
   async showTreePopup(ev: any) {
     const popover = await this.popoverCtrl.create({
       component: TreeComponent,
-      componentProps: { tree: this.retrievedObject[0].tree || ['null'] },
+      componentProps: { tree: this.componentTree || ['null'] },
       /* passes the event trigger so that angular can identify which
       component triggered this event */
       event: ev,
       mode: 'ios',
       animated: true,
       showBackdrop: true,
+	  cssClass: 'tree-popover'
     });
     return await popover.present();
   }
@@ -95,31 +107,36 @@ export class ComponentPage implements OnInit {
 
       try {
         const formattedArray = returnedRoute[0].replace(/'/gi, `"`);
-        console.log(formattedArray);
+        this.errorLoggerSrvc.sendNewLog('Param " ' + formattedArray + ' "');
         // loads component page data from coreData
         this.coreDataSrvc.filter.requestComponent(
-          // parses the array
+          // parses the string array into an actual array
           JSON.parse(formattedArray)
         );
 
         this.retrievedObject = this.coreDataSrvc.filter.retrieve();
-        this.contentTitle = this.retrievedObject[0].title;
-        this.contentBody = this.retrievedObject[0].body;
-        this.headerCode = this.retrievedObject[0].code;
-        this.getCurrentLanguageFromTree = this.retrievedObject[0].tree[0];
-		this.contentRoutes = this.retrievedObject[0].routes;
 
-        if (this.headerCode.length < 2) {
-          this.showExpandButton = false;
-          this.expandsCode = true;
+        if (typeof this.retrievedObject[0] == 'undefined') {
+          this.errorLoggerSrvc.sendNewLog('Not a valid route.')
+          this.errorLoggerSrvc.toErrorPage();
+        } else {
+          this.contentTitle = this.retrievedObject[0].title;
+          this.contentBody = this.retrievedObject[0].body;
+          this.headerCode = this.retrievedObject[0].code;
+          this.componentTree = this.retrievedObject[0].tree;
+          this.language = this.componentTree[0];
+          this.contentRoutes = this.retrievedObject[0].routes;
         }
 
-
-
+        // checks if the header code has any significant content
+        if (this.headerCode.length < 2) {
+          this.showExpandButton = false;
+          this.codeIsExpanded = true;
+        }
       } catch (e) {
-        this.router.navigate(['**']);
         console.log(e);
-
+        this.errorLoggerSrvc.sendNewLog('Failed try/catch At: component.page');
+        this.errorLoggerSrvc.toErrorPage();
       }
     });
   }

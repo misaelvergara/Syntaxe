@@ -14,10 +14,9 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
+
 export class QuerySenderService {
-
   private query = '';
-
   /*
     declares two instances of EventEmitter
   */

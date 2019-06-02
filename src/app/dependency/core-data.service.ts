@@ -4,42 +4,64 @@
   This method returns an array of results that has an identical structure to the
   main array.
 */
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
+import { ErrorLoggerService } from './error-logger.service';
 import ComponentData from './component-data';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CoreDataService {
 
-  private componentData = new ComponentData();
+	@Output() sortedListReady: EventEmitter<any[]> = new EventEmitter();
 
-  private resultsArray = [];
-  private sortedListArray = [];
-  private forceBreakLoop = false;
-  private globalQueryTerm: string;
-  private globalCurrIteration: number;
+	private componentData = new ComponentData();
+  private retrievedObjects = [];
+	// holds all the indexed objects that match a term
+  private retrievedSortedList = [];
+	// holds all the objects indexed in the ComponentData class
+  private breakLoopGlobally = false;
+	// breaks the scoped loops of getComponentProperties
+  private level: number;
+	// stores th
+  private levels: any[];
+  
   public filter = {
     descptLength: 150,
     titleIsSet: true,
     contentIsSet: true,
     codeIsSet: false,
     listWasRetrieved: false,
+	
     ask: (term) => {
-      this.resultsArray = [];
+      this.retrievedObjects = [];
       this.filterComponentData(this.componentData.array, term);
     },
+	
     requestComponent: (ref: any[]) => {
-      this.resultsArray = [];
+	  this.breakLoopGlobally = false;
+      this.retrievedObjects = [];
+	  this.levels = [];
       this.getComponentProperties(this.componentData.array, ref);
     },
-    requestSortedList: () => this.sortList(this.componentData.array),
-    retrieve: () => this.resultsArray,
-    retrieveSortedList: () => {
-      this.filter.listWasRetrieved = true;
-      return this.sortedListArray;
-    }
+	
+    requestSortedList: () => {
+		// checks if list was not retrived yet
+		if (!this.filter.listWasRetrieved) {
+			this.sortList(this.componentData.array);
+		}
+		this.filter.listWasRetrieved = true;
+		this.sortedListReady.emit(this.retrievedSortedList);
+	},
+	
+    retrieve: () => this.retrievedObjects,
+	
   };
+  
+  
+  constructor(private errorLoggerSrvc: ErrorLoggerService) {
+  }
 
   private filterComponentData(searchable: any[], term: string, ref = []): void {
     /*
@@ -91,7 +113,7 @@ export class CoreDataService {
         };
 
         // populates the resultArray with proper results
-        this.resultsArray = this.resultsArray.concat(obj);
+        this.retrievedObjects = this.retrievedObjects.concat(obj);
       }
 
       /*
@@ -113,8 +135,8 @@ export class CoreDataService {
 /*
   finds and retrieves component data
 */
-  private getComponentProperties(searchable: any[], ref = [], curIteration = 0, insertableFunctionId = -1): void {
-	let functionId = insertableFunctionId + 1;
+  private getComponentProperties(searchable: any[], ref = [], globalLevel = 0, insertablelocalLevel = -1): void {
+	let localLevel = insertablelocalLevel + 1;
 	
     // length of the searchable array
     const length = searchable.length;
@@ -122,8 +144,8 @@ export class CoreDataService {
     let term: string;
 	/*
 		tenho um problema
-		a variavel curIteration é individual a cada instância da função
-		ou seja, a cada recursion da função, temos uma variável curIteration para seu escopo
+		a variavel globalLevel é individual a cada instância da função
+		ou seja, a cada recursion da função, temos uma variável globalLevel para seu escopo
 		
 		o que quero é o seguinte: quando a palavra for encontrada,
 		a variavel aumenta globalmente em todas as instancias da função
@@ -132,9 +154,7 @@ export class CoreDataService {
 		Logo, então: 
 		todas as instâncias da função são afetadas
 	*/
-	this.globalCurrIteration = curIteration;
-	console.log('curr iteration changes: ' + this.globalCurrIteration);
-
+	this.level = globalLevel;
     /*
       Loops through the existing objects inside the searchable array
     */
@@ -144,14 +164,12 @@ export class CoreDataService {
         Each key in the array, counting down from the last key, represents a
         parent object that contains the target object. That way, a[0] contains a[1]
         and a[1] contains a[2], and so on..*/
-      term = ref[this.globalCurrIteration];
+      term = ref[this.level];
       let foundInTitle = searchable[i].title == term;
-	  console.log('(' + functionId + ') ' + '(' + this.globalCurrIteration + ')' +
-	  'term of current iteration: '+term+' for '+searchable[i].title+'\n  foundInTitle: '+foundInTitle);
       // checks if the term was found
       if (foundInTitle) {
         // checks if the last iteration of the reference array was reached
-        if (this.globalCurrIteration == ref.length - 1) {
+        if (this.level == ref.length - 1) {
           // fills the object with proper properties for the component page to handle
           obj = {
 			routes: searchable[i].routes,
@@ -167,33 +185,37 @@ export class CoreDataService {
 			
             tree: ref,
           };
-          this.resultsArray = this.resultsArray.concat(obj);
-          console.log(obj);
+          this.retrievedObjects = this.retrievedObjects.concat(obj);
+		  this.breakLoopGlobally = true;
 		  /*
 			this forces other iterations of the loop to break once the requested data was found
 		  */
-		  this.forceBreakLoop = true;
-		  break;
         } else {
-          // else, iterates again, increasing the value of curIteration
-          ++this.globalCurrIteration;
+          // else, iterates again, increasing the value of globalLevel
+          ++this.level;
         }
 
       }
 
       // checks if the searchable array has any iterable arrays
 	  /* also checks
-		if the globalCurrIteration variable changes, then the searched term was matched and the
-		function is trying to search for the next term 
+		if the level has a higher value than the localLevel, then the function is ready to call itself
+		in order to look for the next key of the ref array passed as a parameter
+		
+		this stops the function from searching for results on the children of a parent if the current
+		term wasn't found yet
 	  */
-      if (searchable[i].hasChildren && this.globalCurrIteration != functionId) {
-        this.getComponentProperties(searchable[i].children, ref, this.globalCurrIteration, functionId);
-      }
-	  /*
-		this forces other iterations of the loop to break once the requested data was found
-	  */
-	  if (this.forceBreakLoop) {
-		  this.forceBreakLoop = false;
+      if (searchable[i].hasChildren && foundInTitle) {
+			this.getComponentProperties(searchable[i].children, ref, this.level, localLevel);	
+      } else if (this.level > localLevel) {		  
+		  // this stops the function globally
+		  this.breakLoopGlobally = true;
+		  console.log('...');
+		  this.errorLoggerSrvc.sendNewLog('Attempted to get component data for an invalid term. Parent scope has no children for terms.');
+		  this.errorLoggerSrvc.sendNewLog('Attempted to search for the next term (global level changed) in the same local level.');
+	  }
+	  // this forces other iterations of the loop to break once the requested data was found
+	  if (this.breakLoopGlobally) {
 		  break;
 	  }
 
@@ -215,7 +237,7 @@ export class CoreDataService {
       };
 
       // populates the resultArray with proper results
-      this.sortedListArray = this.sortedListArray.concat(obj);
+      this.retrievedSortedList = this.retrievedSortedList.concat(obj);
 
 
       /*
@@ -227,16 +249,20 @@ export class CoreDataService {
     }
   }
 
-  public addBrackets(param: any[]) {
-    return `['` + param.join(`','`) + `']`;
+  public formatForRouter(param: any[]) {
+	if (typeof param != 'undefined') {
+		return `['` + param.join(`','`) + `']`;
+	} else {
+		this.errorLoggerSrvc.sendNewLog('Attempted to format an invalid route.');
+		this.errorLoggerSrvc.toErrorPage();
+		return ' ';
+	}
   }
 
 
 
   private matchStrings(p1: string, p2: string) {
     return p1.toLowerCase().indexOf(p2.toLowerCase()) > -1;
-  }
-  constructor() {
   }
 }
 

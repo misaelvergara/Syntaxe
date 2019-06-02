@@ -3,7 +3,7 @@
     <!-- item container -->
     <ion-item detail="false" class="list-header-title-background"
       [class.background-high-hierarchy]="index.tree.length == 1" [lines]="(index.tree.length == 1) ? 'none' : 'full'"
-      [routerLink]="['/component', addBrackets(index.tree)]">
+      [routerLink]="['/component', formatForRouter(index.tree)]">
       <!-- advance arrow icon -->
       <ion-icon [color]="(index.tree.length == 1) ? 'light' : 'primary'" name="md-arrow-round-forward"
         [slot]="(index.tree.length == 1) ? 'start' : 'end'"></ion-icon>

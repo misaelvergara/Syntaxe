@@ -1,5 +1,9 @@
 <ion-header>
-  <app-topbar [showsAppName]="false" [insertableTitle]="['Lista-Índice']" [showsBackButton]="true"></app-topbar>
+  <app-topbar [showsAppName]="false" [insertableTitle]="['Sumário']" [showsBackButton]="true"></app-topbar>
+  <div class="list-progress" [class.hide-list-progress]="listHasLoaded">
+	<ion-progress-bar reversed="true" mode="md" *ngIf="!canCancelProgressBar" color="primary" [value]="progress"></ion-progress-bar>
+  </div>
+  
 </ion-header>
 <ion-content>
   <app-list-generator [iterableList]="retrievedComponentList"></app-list-generator>
