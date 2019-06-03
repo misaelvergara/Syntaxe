@@ -17,9 +17,9 @@ export class CoreDataService {
 	@Output() sortedListReady: EventEmitter<any[]> = new EventEmitter();
 
 	private componentData = new ComponentData();
-  private retrievedObjects = [];
+  private fetchedObjects = [];
 	// holds all the indexed objects that match a term
-  private retrievedSortedList = [];
+  private fetchedSortedList = [];
 	// holds all the objects indexed in the ComponentData class
   private breakLoopGlobally = false;
 	// breaks the scoped loops of getComponentProperties
@@ -32,30 +32,30 @@ export class CoreDataService {
     titleIsSet: true,
     contentIsSet: true,
     codeIsSet: false,
-    listWasRetrieved: false,
+    listWasfetched: false,
 	
     ask: (term) => {
-      this.retrievedObjects = [];
+      this.fetchedObjects = [];
       this.filterComponentData(this.componentData.array, term);
     },
 	
     requestComponent: (ref: any[]) => {
 	  this.breakLoopGlobally = false;
-      this.retrievedObjects = [];
+      this.fetchedObjects = [];
 	  this.levels = [];
       this.getComponentProperties(this.componentData.array, ref);
     },
 	
     requestSortedList: () => {
 		// checks if list was not retrived yet
-		if (!this.filter.listWasRetrieved) {
+		if (!this.filter.listWasfetched) {
 			this.sortList(this.componentData.array);
 		}
-		this.filter.listWasRetrieved = true;
-		this.sortedListReady.emit(this.retrievedSortedList);
+		this.filter.listWasfetched = true;
+		this.sortedListReady.emit(this.fetchedSortedList);
 	},
 	
-    retrieve: () => this.retrievedObjects,
+    fetch: () => this.fetchedObjects,
 	
   };
   
@@ -113,7 +113,7 @@ export class CoreDataService {
         };
 
         // populates the resultArray with proper results
-        this.retrievedObjects = this.retrievedObjects.concat(obj);
+        this.fetchedObjects = this.fetchedObjects.concat(obj);
       }
 
       /*
@@ -133,7 +133,7 @@ export class CoreDataService {
     }
   }
 /*
-  finds and retrieves component data
+  finds and fetchs component data
 */
   private getComponentProperties(searchable: any[], ref = [], globalLevel = 0, insertablelocalLevel = -1): void {
 	let localLevel = insertablelocalLevel + 1;
@@ -185,7 +185,7 @@ export class CoreDataService {
 			
             tree: ref,
           };
-          this.retrievedObjects = this.retrievedObjects.concat(obj);
+          this.fetchedObjects = this.fetchedObjects.concat(obj);
 		  this.breakLoopGlobally = true;
 		  /*
 			this forces other iterations of the loop to break once the requested data was found
@@ -237,7 +237,7 @@ export class CoreDataService {
       };
 
       // populates the resultArray with proper results
-      this.retrievedSortedList = this.retrievedSortedList.concat(obj);
+      this.fetchedSortedList = this.fetchedSortedList.concat(obj);
 
 
       /*

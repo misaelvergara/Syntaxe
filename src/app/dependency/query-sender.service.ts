@@ -20,8 +20,8 @@ export class QuerySenderService {
   /*
     declares two instances of EventEmitter
   */
-  @Output() hasEmittedQuery: EventEmitter<string> = new EventEmitter();
-  @Output() hasEmittedUserIsTyping: EventEmitter<boolean> = new EventEmitter();
+  @Output() gotQuery: EventEmitter<string> = new EventEmitter();
+  @Output() gotIsTyping: EventEmitter<boolean> = new EventEmitter();
 
   /*
     declares a method that takes up a param
@@ -32,11 +32,11 @@ export class QuerySenderService {
   */
   emitNewQuery(param) {
     this.query = param;
-    this.hasEmittedQuery.emit(this.query);
+    this.gotQuery.emit(this.query);
   }
 
-  emitUserIsTyping(param: boolean) {
-    this.hasEmittedUserIsTyping.emit(param);
+  emitIsTyping(param: boolean) {
+    this.gotIsTyping.emit(param);
 
   }
   constructor() { }

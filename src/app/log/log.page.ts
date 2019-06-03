@@ -30,15 +30,13 @@ export class LogPage implements OnInit, OnDestroy {
 	});
 	
 	  this.log = '...';	  
-	  this.errorLoggerSrvc.logsReady.subscribe(retrieved => {
-		  this.log = retrieved;
-		  console.log('triggered');
+	  this.errorLoggerSrvc.logsReady.subscribe(fetched => {
+		  this.log = fetched;
 	  });
 	  this.errorLoggerSrvc.getAllLogs();
   }
   
   ngOnDestroy() {
-	  console.log('nuu ive been destroiedo');
 	  if (this.subscription) {
 		  this.subscription.unsubscribe();
 	  }

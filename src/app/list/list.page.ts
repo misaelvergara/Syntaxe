@@ -8,7 +8,7 @@ import { CoreDataService } from '../dependency/core-data.service';
 })
 
 export class ListPage implements OnInit {
-  public retrievedComponentList: any[];
+  public fetchedComponentList: any[];
   public listHasLoaded = false;
 	// tells the view the list has loaded, making the progress bar slowly fade
   public canCancelProgressBar = false;
@@ -22,10 +22,10 @@ export class ListPage implements OnInit {
 	*/	
 	ngOnInit() {
 	// subcribebles are liseteners, gets sorted list when its ready
-	this.coreDataSrvc.sortedListReady.subscribe(retrieved => {
-		// the list was retrieved, now the component waits 1s in order for animations to take effect
+	this.coreDataSrvc.sortedListReady.subscribe(fetched => {
+		// the list was fetched, now the component waits 1s in order for animations to take effect
 		setTimeout(() => {
-		this.retrievedComponentList = retrieved;
+		this.fetchedComponentList = fetched;
 		this.listHasLoaded = true;
 		clearInterval(interval);
 			// interrupts interval definitevely 		

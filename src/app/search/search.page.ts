@@ -26,17 +26,13 @@ export class SearchPage implements OnInit {
     a singleton across all components) of search service */
   constructor(
     private coreDataSrvc: CoreDataService,
-    private querySrvc: QuerySenderService) {
+    private querySenderSrvc: QuerySenderService) {
   }
-  public retrievedComponentList: any;
+  public fetchedComponentList: any;
   public userIsTyping = false;
   public canDisplaySecHeader = false;
   public outputHeader: string;
   public resultHeader: string;
-
-  public formatForRouter(param) {
-    return this.coreDataSrvc.formatForRouter(param);
-  }
 
   ngOnInit() {
     this.resultHeader = 'Comece sua busca!';
@@ -44,7 +40,7 @@ export class SearchPage implements OnInit {
       gets notified if the user is typing
       @param returns a boolean
      */
-    this.querySrvc.hasEmittedUserIsTyping.subscribe(param => {
+    this.querySenderSrvc.gotIsTyping.subscribe(param => {
       this.userIsTyping = param;
       if (param) {
         this.resultHeader = 'Pesquisando...';
@@ -55,7 +51,7 @@ export class SearchPage implements OnInit {
     /*
       subscribes to changes in the query
     */
-    this.querySrvc.hasEmittedQuery.subscribe((param: string) => {
+    this.querySenderSrvc.gotQuery.subscribe((param: string) => {
       // changes were made, so:
 
       // checks if string contains only whitespace
@@ -63,7 +59,7 @@ export class SearchPage implements OnInit {
         this.canDisplaySecHeader = false;
         this.resultHeader = 'Pesquisa inválida.';
         // tells the QuerySenderService to emit that the user is no longer typing
-        this.querySrvc.emitUserIsTyping(false);
+        this.querySenderSrvc.emitIsTyping(false);
         return;
       } else {
         this.canDisplaySecHeader = true;
@@ -75,9 +71,9 @@ export class SearchPage implements OnInit {
         as an array
       */
       this.coreDataSrvc.filter.ask(param);
-      this.retrievedComponentList = this.coreDataSrvc.filter.retrieve();
+      this.fetchedComponentList = this.coreDataSrvc.filter.fetch();
 
-      const length = this.retrievedComponentList.length;
+      const length = this.fetchedComponentList.length;
       if (length > 1) {
         this.resultHeader = `Foram encontrados (${length}) resultados.`;
       } else if (length > 0) {
@@ -88,7 +84,7 @@ export class SearchPage implements OnInit {
 
       // search is done
       // tells the QuerySenderService to emit that the user is no longer typing
-      this.querySrvc.emitUserIsTyping(false);
+      this.querySenderSrvc.emitIsTyping(false);
     });
   }
 }

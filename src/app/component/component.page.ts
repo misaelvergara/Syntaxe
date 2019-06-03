@@ -1,5 +1,5 @@
 /*
-  This page is designed to retrieve component data from the CoreData service and display
+  This page is designed to fetch component data from the CoreData service and display
   it according to an array received as a router parameter (url parameters).
 
   @depends on ActivatedRoute to request the router parameters. Receives it as an observable.
@@ -27,8 +27,8 @@ import { TreeComponent } from './tree/tree.component';
 export class ComponentPage implements OnInit {
   public codeIsExpanded = false;
   public showExpandButton = true;
-  // retrieves an array of a single object
-  public retrievedObject: any[];
+  // fetches an array of a single object
+  public fetchedObject: any[];
   public breakLineToggle = false;
   public wordbreakIsOn = true;
 
@@ -114,18 +114,18 @@ export class ComponentPage implements OnInit {
           JSON.parse(formattedArray)
         );
 
-        this.retrievedObject = this.coreDataSrvc.filter.retrieve();
+        this.fetchedObject = this.coreDataSrvc.filter.fetch();
 
-        if (typeof this.retrievedObject[0] == 'undefined') {
+        if (typeof this.fetchedObject[0] == 'undefined') {
           this.errorLoggerSrvc.sendNewLog('Not a valid route.')
           this.errorLoggerSrvc.toErrorPage();
         } else {
-          this.contentTitle = this.retrievedObject[0].title;
-          this.contentBody = this.retrievedObject[0].body;
-          this.headerCode = this.retrievedObject[0].code;
-          this.componentTree = this.retrievedObject[0].tree;
+          this.contentTitle = this.fetchedObject[0].title;
+          this.contentBody = this.fetchedObject[0].body;
+          this.headerCode = this.fetchedObject[0].code;
+          this.componentTree = this.fetchedObject[0].tree;
           this.language = this.componentTree[0];
-          this.contentRoutes = this.retrievedObject[0].routes;
+          this.contentRoutes = this.fetchedObject[0].routes;
         }
 
         // checks if the header code has any significant content

@@ -24,7 +24,7 @@ export class BottomBarComponent implements OnInit {
   }
 
   userIsTyping() {
-    this.querySenderSrvc.emitUserIsTyping(true);
+    this.querySenderSrvc.emitIsTyping(true);
   }
   
   clearSearchBar() {
