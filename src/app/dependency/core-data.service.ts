@@ -177,11 +177,11 @@ export class CoreDataService {
 			
             body: searchable[i].hasContent ? 
 			`${searchable[i].body}` 
-			: `Ainda não temos código disponível para a página '${searchable[i].title}'.`,
+			: `Ainda não temos conteúdo disponível para a página '${searchable[i].title}'.`,
 			
-            code: (typeof searchable[i].code === 'undefined') ? 
-			`Desculpe! Ainda não temos conteúdo disponível para a página '${searchable[i].title}'.`
-			: `${searchable[i].code}`,
+            code: (typeof searchable[i].code === 'undefined' || searchable[i].code == '') ? 
+			`Desculpe! Ainda não temos código disponível para a página '${searchable[i].title}'.`
+			: this.highlightSyntax(searchable[i].code),
 			
             tree: ref,
           };
@@ -264,5 +264,27 @@ export class CoreDataService {
   private matchStrings(p1: string, p2: string) {
     return p1.toLowerCase().indexOf(p2.toLowerCase()) > -1;
   }
+  
+  private highlightSyntax(stringParam: string): string {
+	let parsedStr = stringParam;
+    // string - prepares parse
+    parsedStr = parsedStr.replace(/(\"|\'|\`)(.*)(\"|\'|\`)/g,'K$1K$2K$3K');
+    // equal sign - prepares parse
+    parsedStr = parsedStr.replace(/\=+/g,'EQUAL__SIGN__SYMB');
+    // names
+    parsedStr = parsedStr.replace(/([a-zA-Z\_\$]+\d*[a-zA-Z\_\$]*\d*)(\s*\:|\s*EQUAL__SIGN__SYMB)/g,'<span class="name">$1</span>$2');
+    // symbols
+    parsedStr = parsedStr.replace(/(?!\/span|\/pre)(EQUAL__SIGN__SYMB|\?|\\|\/|\+|\-|\:|\*|\!|\||\{|\}|\[|\]|\(|\)|\;|\.|\,)/g,'<span class="symbols">$1</span>');
+    // equal sign
+    parsedStr = parsedStr.replace(/EQUAL__SIGN__SYMB+/g,'=');
+    // important names
+    parsedStr = parsedStr.replace(/\b(new|let|const|var|false|true|if|do|function|while|switch|for|foreach|in|continue|break)(?=[^\w])/g,'<span class="special">$1</span>');
+    // number
+    parsedStr = parsedStr.replace(/(\b\d\b)/g,'<span class="numbers">$1</span>');	
+    // string - final parse
+    parsedStr = parsedStr.replace(/(K(\"|\'|\`)K)(.*)(K(\"|\'|\`)K)/g,'<span class="string">$2$3$5</span>');  
+    return parsedStr;
+}
+  
 }
 

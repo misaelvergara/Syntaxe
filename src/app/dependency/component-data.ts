@@ -23,9 +23,17 @@ export default class ComponentData {
                                 title: 'Object (objeto)',
 								routes: ['Java', 'Tipos de Dados', 'Dados Não-Primitivos', 'Object'],
                                 body: 
-`JavaScript objects are written with curly braces {}.
+`<h1>O conceito de objeto</h1>
+Para entender o conceito de objeto em linguagens de programação, podemos tomar um exemplo da vida real.
 
-<h1>An object has properties and methods</h1>
+Veja, temos um <b>carro</b>. <b>Um carro é um objeto</b>. O carro tem uma cor, uma marca e um modelo. Podemos chamar cor, marca e modelo, de <b>propriedades</b> do carro.
+
+Um carro pode dar partida, ser dirigido e então ser desligado. Podemos imaginar que <b>as ações dar partida, dirigir e desligar, são métodos do carro</b>. PS: você também pode imaginar que são funções, mas o nome correto à ser atribuído é método.
+
+<a>Voce sabe o que é uma variável? Não? Clique aqui.</a>
+
+
+JavaScript objects are written with curly braces {}.
 The name:values pairs in JavaScript objects are called properties:
 
 You can access object properties in two ways.
