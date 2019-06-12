@@ -28,41 +28,62 @@ Para entender o conceito de objeto em linguagens de programação, podemos tomar
 
 Veja, temos um <b>carro</b>. <b>Um carro é um objeto</b>. O carro tem uma cor, uma marca e um modelo. Podemos chamar cor, marca e modelo, de <b>propriedades</b> do carro.
 
-Um carro pode dar partida, ser dirigido e então ser desligado. Podemos imaginar que <b>as ações dar partida, dirigir e desligar, são métodos do carro</b>. PS: você também pode imaginar que são funções, mas o nome correto à ser atribuído é método.
+Um carro pode dar partida, ser dirigido e então ser desligado. Podemos imaginar que <b>as ações dar partida, dirigir e desligar, são métodos do carro</b>. PS: você também pode imaginar que são funções do carro, mas o nome correto à ser atribuído é <b>método</b>.
 
-<a>Voce sabe o que é uma variável? Não? Clique aqui.</a>
+Sendo assim, um Objeto tem <b>propriedades</b> e <b>métodos</b>. As propriedades de um objeto são informações sobre ele mesmo. Enquanto que, os métodos de um objeto, são ações que o objeto pode executar.
 
+<h1>Objetos em JavaScript</h1>
 
-JavaScript objects are written with curly braces {}.
-The name:values pairs in JavaScript objects are called properties:
+Objeto é um tipo de dado que contém outras variáveis. Ele possui um nome identificador (no campo de código acima, este nome é o <u>nomeDoObjeto</u>), que é seguido pelo atribuidor (<u>=</u>) e, então, por duas chaves (<u>{ }</u>).
 
-You can access object properties in two ways.
-["name"] or .name
+A convenção para definir um objeto é, portanto, a seguinte: <u>nomeDoObjeto = {}</u>
 
-You have already learned that JavaScript variables are containers for data values.
-Objects are variables too. But objects can contain many values.
-The values are written as name:value pairs (name and value separated by a colon).
+Dentro das chaves, são definidos os métodos e propriedades do objeto. Estes são definidos da seguinte forma: nome identificador da variável, atribuidor (<u>:</u>), valor da variável seguido, por fim, de uma vírgula (<u>,</u>). A <b>vírgula</b> é utilizada para separar os métodos ou propriedades de um objeto.
 
-A JavaScript object literal is a comma-separated list of name-value pairs wrapped in curly braces.
+Para <b>acessar</b> um <b>método</b> ou o valor de uma <b>propriedade de um objeto</b>, é utilizada uma convenção parecida com um endereço. Tendo como referência o campo de código acima, veja o exemplo:
 
-You define (and create) a JavaScript object with an object literal:
+<u>nomeDoObjeto.nomeDeUmaString</u> retornará o valor <u>"Sou uma string"</u>
+<u>nomeDoObjeto.umArray</u> retornará o array (vetor) <u>umArray</u>. Para acessar um índice deste vetor, usamos, portanto: <u>nomeDoObjeto.umArray[2]</u>. Isso retornará o valor <u>4</u> alocado no índice <u>[2]</u>
 
-Object literals encapsulate data, enclosing it in a tidy package.
-This minimizes the use of global variables which can cause problems when combining code.`,
+Além disso, é possível acessar uma propriedade ou um método de um objeto da seguinte maneira: <u>nomeDoObjeto.["nomeDeUmaString"]</u>. Utilizamos, dessa forma, colchetes e aspas para acessar o valor de <u>nomeDeUmaString</u>.`,
                     // end of body
                                 code: 
- `nomeDoObjeto = {
-      umaString: "valor da string valor da string valor da string valor da string valor da string valor da string valor da string valor da string ",
-      umaFuncao: function() {
-          console.log("Olá, mundo")
-      },
-      umNumero: 2,
-      umArray: [0, 2, 4, "valor", 6],
-      outroObjeto: {
+`nomeDoObjeto = {
+    nomeDeUmaString: "Sou uma string",
+    nomeDeOutraString: "Sou outra string",
+    umaStringBemLonga: "a b c d e f g h i j k l m n o p q r s t u v w x y z   q w e r t y u i o p a s d f g h j k l ç z x c v b n m",
+    
+    umaFuncao: function() {
+        console.log("olá mundo")
+    },
+
+    umNumero: 2,
+    outroNumero: 9001,
+    umArray: [0, 2, 4, "valor", 6],
+
+    outroObjeto: {
         umaString: "ooi",
-        stringSimpatica: "tudo bem?"
-      },
-      umaBoolean: false
+        stringSimpatica: "tudo bem e vc"
+    },
+
+    umaBoolean: true,
+    booleanNaoVerdadeira: false
+  };
+  
+  carro = {
+      marca: "Toyota",
+      modelo: "Corolla",
+      anoFabricacao: 2019,
+      foiUsado: false,
+      quilometragem: 0,
+      preco: 79990.00
+      comentarios: [
+        "quero muito",
+        "credo, carro feio",
+        "gostei só do preto",
+        "ah o cinza é mais bonito",
+        "não tenho nem dinheiro pro pão mas eu quero"
+        ]
   };`
                 // end of code
                                 
@@ -157,8 +178,17 @@ This minimizes the use of global variables which can cause problems when combini
                                 hasContent: true,
                                 hasChildren: false,
                                 title: 'Object',
-								routes: ['JavaScript', 'Tipos de Dados', 'Dados Não-Primitivos', 'Object'],
-                                body: '',
+								routes: ['JavaScript', 'Tipos de Dados', 'Dados Não-Primitivos', 'Object (objeto)'],
+                                body:
+`<h1>O conceito de objeto</h1>
+Para entender o conceito de objeto em linguagens de programação, podemos tomar um exemplo da vida real.
+
+Veja, temos um <b>carro</b>. <b>Um carro é um objeto</b>. O carro tem uma cor, uma marca e um modelo. Podemos chamar cor, marca e modelo, de <b>propriedades</b> do carro.
+
+Um carro pode dar partida, ser dirigido e então ser desligado. Podemos imaginar que <b>as ações dar partida, dirigir e desligar, são métodos do carro</b>. PS: você também pode imaginar que são funções do carro, mas o nome correto à ser atribuído é <b>método</b>.
+
+Sendo assim, um Objeto tem <b>propriedades</b> e <b>métodos</b>. As propriedades de um objeto são informações sobre ele mesmo. Enquanto que, os métodos de um objeto, são ações que o objeto pode executar.
+`,
                                 code: ''
                             }, {
                                 hasContent: true,

@@ -278,9 +278,9 @@ export class CoreDataService {
     // equal sign
     parsedStr = parsedStr.replace(/EQUAL__SIGN__SYMB+/g,'=');
     // important names
-    parsedStr = parsedStr.replace(/\b(new|let|const|var|false|true|if|do|function|while|switch|for|foreach|in|continue|break)(?=[^\w])/g,'<span class="special">$1</span>');
+    parsedStr = parsedStr.replace(/\b(new|let|const|var|false|true|if|function|while|switch|for|foreach|in|continue|break)(?=[^\w])/g,'<span class="special">$1</span>');
     // number
-    parsedStr = parsedStr.replace(/(\b\d\b)/g,'<span class="numbers">$1</span>');	
+    parsedStr = parsedStr.replace(/(\b\d+\b)/g,'<span class="numbers">$1</span>');	
     // string - final parse
     parsedStr = parsedStr.replace(/(K(\"|\'|\`)K)(.*)(K(\"|\'|\`)K)/g,'<span class="string">$2$3$5</span>');  
     return parsedStr;
